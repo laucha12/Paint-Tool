@@ -57,9 +57,12 @@ public class PaintPane extends BorderPane {
 		buttonsBox.setPrefWidth(100);
 		gc.setLineWidth(1);
 		canvas.setOnMousePressed(event -> {
+			// tomo el primer punto en el que se hace click en la pantalla para guardarlo
 			startPoint = new Point(event.getX(), event.getY());
 		});
 		canvas.setOnMouseReleased(event -> {
+			//toma el segundo punto donde se suelta el mouse para saber donde poder dibujar la figura si la misma
+			//fue seleccionada
 			Point endPoint = new Point(event.getX(), event.getY());
 			if(startPoint == null) {
 				return ;
@@ -68,15 +71,19 @@ public class PaintPane extends BorderPane {
 				return ;
 			}
 			Figure newFigure = null;
+			//TODO tener una variable axuliar con el boton seleccionado o algo similar pues sino seria una serie infinita de if else
 			if(rectangleButton.isSelected()) {
+				// si selecciono el boton de rectangulo anteriormente lo dibuja
 				newFigure = new Rectangle(startPoint, endPoint);
 			}
 			else if(circleButton.isSelected()) {
+				// si selecciono el boton de circulo lo dibujo
 				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
 				newFigure = new Circle(startPoint, circleRadius);
 			} else {
 				return ;
 			}
+			// dibuja la figura que generaste anteriormente
 			canvasState.addFigure(newFigure);
 			startPoint = null;
 			redrawCanvas();
@@ -98,28 +105,33 @@ public class PaintPane extends BorderPane {
 			}
 		});
 
+
 		canvas.setOnMouseClicked(event -> {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
 				boolean found = false;
 				StringBuilder label = new StringBuilder("Se seleccionó: ");
-				for (Figure figure : canvasState.figures()) {
-					if(figureBelongs(figure, eventPoint)) {
+				for (Figure figure : canvasState.figures()) {   			//Itera para buscar dentro de las figuras de la canvas
+					if(figureBelongs(figure, eventPoint)) {					//Si encontro la figuar
 						found = true;
 						selectedFigure = figure;
 						label.append(figure.toString());
 					}
 				}
 				if (found) {
-					statusPane.updateStatus(label.toString());
+					statusPane.updateStatus(label.toString());				//Actualiza el estado si encontro la figura
 				} else {
 					selectedFigure = null;
-					statusPane.updateStatus("Ninguna figura encontrada");
+					statusPane.updateStatus("Ninguna figura encontrada");  //Actualiza el estado si no encontro la figura
 				}
 				redrawCanvas();
 			}
 		});
 		canvas.setOnMouseDragged(event -> {
+			//lo que hace es determinar el evento que se va a probocar en el momento
+			// en el que el mouse se se mueva con una figura adentro
+
+			//TODO Esta mal como lo hace debemos ponerlo directamente en la clase figure
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
 				double diffX = (eventPoint.getX() - startPoint.getX()) / 100;

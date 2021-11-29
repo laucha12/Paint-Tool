@@ -157,22 +157,24 @@ public class PaintPane extends BorderPane {
 		setRight(canvas);
 	}
 
+
+	//TODO ya averiguamos como se puede borrar una figura, entonces podemos mejorar la eficiencia evitantdo tener que redibujar entero
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		for(Figure figure : canvasState.figures()) {
-			if(figure == selectedFigure) {
+		for(Figure figure : canvasState.figures()) {								//al canvasState le pido las figuras e itero sobre ellas
+			if(figure == selectedFigure) {											//Si la figura es la seleccionada, el stroke se lo hago rojo
 				gc.setStroke(Color.RED);
 			} else {
-				gc.setStroke(lineColor);
+				gc.setStroke(lineColor);											//Si no el lineColor (que por ahora es negro xq es el por defecto)
 			}
-			gc.setFill(fillColor);
-			if(figure instanceof Rectangle) {
+			gc.setFill(fillColor);													//Relleno la figura con el color por defecto
+			if(figure instanceof Rectangle) {										//Si la figura es un rectangulo procede a dibujarla
 				Rectangle rectangle = (Rectangle) figure;
 				gc.fillRect(rectangle.getTopLeft().getX(), rectangle.getTopLeft().getY(),
 						Math.abs(rectangle.getTopLeft().getX() - rectangle.getBottomRight().getX()), Math.abs(rectangle.getTopLeft().getY() - rectangle.getBottomRight().getY()));
 				gc.strokeRect(rectangle.getTopLeft().getX(), rectangle.getTopLeft().getY(),
 						Math.abs(rectangle.getTopLeft().getX() - rectangle.getBottomRight().getX()), Math.abs(rectangle.getTopLeft().getY() - rectangle.getBottomRight().getY()));
-			} else if(figure instanceof Circle) {
+			} else if(figure instanceof Circle) {									//Si la figura es un circulo procede a dibujarla
 				Circle circle = (Circle) figure;
 				double diameter = circle.getRadius() * 2;
 				gc.fillOval(circle.getCenterPoint().getX() - circle.getRadius(), circle.getCenterPoint().getY() - circle.getRadius(), diameter, diameter);
@@ -181,13 +183,15 @@ public class PaintPane extends BorderPane {
 		}
 	}
 
+
+	//TODO Hay que moverlo al back, haciedno que figure tenga el metodo y que cada tipo de figura lo sobreescriba
 	boolean figureBelongs(Figure figure, Point eventPoint) {
-		boolean found = false;
-		if(figure instanceof Rectangle) {
+		boolean found = false;										//Comienza como que no lo encontre
+		if(figure instanceof Rectangle) {							//Si es un rectangulo se fija que el punto este dentro de la figura
 			Rectangle rectangle = (Rectangle) figure;
 			found = eventPoint.getX() > rectangle.getTopLeft().getX() && eventPoint.getX() < rectangle.getBottomRight().getX() &&
 					eventPoint.getY() > rectangle.getTopLeft().getY() && eventPoint.getY() < rectangle.getBottomRight().getY();
-		} else if(figure instanceof Circle) {
+		} else if(figure instanceof Circle) {						//Si es un circulo se fija que el punto este dentro de la figura
 			Circle circle = (Circle) figure;
 			found = Math.sqrt(Math.pow(circle.getCenterPoint().getX() - eventPoint.getX(), 2) +
 					Math.pow(circle.getCenterPoint().getY() - eventPoint.getY(), 2)) < circle.getRadius();

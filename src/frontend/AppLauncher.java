@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// Clase que extiende directamente a la clase de JavaFX que ejecuta el front end
 public class AppLauncher extends Application {
 
 	public static void main(String[] args) {

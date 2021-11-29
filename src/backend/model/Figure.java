@@ -2,22 +2,21 @@ package backend.model;
 
 import java.util.Collection;
 
-public abstract class Figure implements Movable {
-
+public interface Figure extends Movable {
+/*
     @Override
-    public String toString(){
+    default String toString(){
         return identifier() + "[" + getPoints() + "]";
-    }
+    }*/
 
-    abstract Collection<Point> getPoints();
+     Collection<Point> getPoints();
 
-    abstract double getWidth();
+     double getWidth();
 
-    abstract double getHeight();
+     double getHeight();
 
-    abstract String identifier();
+     String identifier();
 
-    abstract void display(); //This function is designed such that it's implemented in the front end
+     void display(); //This function is designed such that it's implemented in the front end
                              //
-
 }

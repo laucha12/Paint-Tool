@@ -1,9 +1,8 @@
 package frontend;
 
-import backend.model.Circle;
-import backend.model.Figure;
-import backend.model.Point;
-import backend.model.Rectangle;
+import backend.model.*;
+import frontend.Elements.CircleFront;
+import frontend.Elements.RectangleFront;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -73,12 +72,12 @@ public class PaintPane extends BorderPane {
 			//TODO tener una variable axuliar con el boton seleccionado o algo similar pues sino seria una serie infinita de if else
 			if(rectangleButton.isSelected()) {
 				// si selecciono el boton de rectangulo anteriormente lo dibuja
-				newFigure = new Rectangle(startPoint, endPoint);
+				newFigure = new RectangleFront(startPoint, endPoint,gc);
 			}
 			else if(circleButton.isSelected()) {
 				// si selecciono el boton de circulo lo dibujo
 				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new Circle(startPoint, circleRadius);
+				newFigure = new CircleFront(startPoint, circleRadius,gc);
 			} else {
 				return ;
 			}
@@ -166,19 +165,8 @@ public class PaintPane extends BorderPane {
 			} else {
 				gc.setStroke(lineColor);											//Si no el lineColor (que por ahora es negro xq es el por defecto)
 			}
-			gc.setFill(fillColor);													//Relleno la figura con el color por defecto
-			if(figure instanceof Rectangle) {										//Si la figura es un rectangulo procede a dibujarla
-				Rectangle rectangle = (Rectangle) figure;
-				gc.fillRect(rectangle.getTopLeft().getX(), rectangle.getTopLeft().getY(),
-						Math.abs(rectangle.getTopLeft().getX() - rectangle.getBottomRight().getX()), Math.abs(rectangle.getTopLeft().getY() - rectangle.getBottomRight().getY()));
-				gc.strokeRect(rectangle.getTopLeft().getX(), rectangle.getTopLeft().getY(),
-						Math.abs(rectangle.getTopLeft().getX() - rectangle.getBottomRight().getX()), Math.abs(rectangle.getTopLeft().getY() - rectangle.getBottomRight().getY()));
-			} else if(figure instanceof Circle) {									//Si la figura es un circulo procede a dibujarla
-				Circle circle = (Circle) figure;
-				double diameter = circle.getRadius() * 2;
-				gc.fillOval(circle.getCenterPoint().getX() - circle.getRadius(), circle.getCenterPoint().getY() - circle.getRadius(), diameter, diameter);
-				gc.strokeOval(circle.getCenterPoint().getX() - circle.getRadius(), circle.getCenterPoint().getY() - circle.getRadius(), diameter, diameter);
-			}
+			gc.setFill(fillColor);
+			figure.display();
 		}
 	}
 

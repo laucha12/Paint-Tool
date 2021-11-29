@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Rectangle extends Figure {
+public abstract class Rectangle implements Figure {
 
     private final Point topLeft, bottomRight;
 
@@ -27,7 +27,7 @@ public abstract class Rectangle extends Figure {
     }
 
     @Override
-    Collection<Point> getPoints() {
+    public Collection<Point> getPoints() {
         List<Point> toReturn =  new ArrayList<Point>();
         toReturn.add(topLeft);
         toReturn.add(bottomRight);
@@ -35,17 +35,18 @@ public abstract class Rectangle extends Figure {
     }
 
     @Override
-    double getWidth() {
-        return bottomRight.getX() - topLeft.getX();
+    public double getWidth() {
+        return Math.abs( bottomRight.getX() - topLeft.getX());
     }
 
     @Override
-    double getHeight() {
-        return topLeft.getY() - bottomRight.getY();
+    public double getHeight() {
+
+        return Math.abs(topLeft.getY() - bottomRight.getY());
     }
 
     @Override
-    String identifier() {
+    public String identifier() {
         return "Rectangulo";
     }
 

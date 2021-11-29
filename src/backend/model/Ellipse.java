@@ -4,37 +4,38 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Ellipse extends Figure {
+public abstract class Ellipse implements Figure {
 
 
     protected final Point centerPoint;
-    protected final double radius;
+    protected final double minAxis, maxAxis;
 
-    public Ellipse(Point centerPoint, double radius) {
+    public Ellipse(Point centerPoint, double minAxis, double maxAxis) {
         this.centerPoint = centerPoint;
-        this.radius = radius;
+        this.maxAxis = maxAxis;
+        this.minAxis = minAxis;
     }
 
     @Override
     public String toString() {
-        return String.format("Círculo [Centro: %s, Radio: %.2f]", centerPoint, radius);
+        return String.format("Ellipse [Centro: %s, Radio: %.2f]", centerPoint, minAxis);
     }
 
     @Override
-    Collection<Point> getPoints() {
+    public Collection<Point> getPoints() {
         List<Point> toReturn = new ArrayList<>();
         toReturn.add(centerPoint);
         return toReturn;
     }
 
     @Override
-    double getWidth() {
-        return getRadius();
+    public double getWidth() {
+        return minAxis;
     }
 
     @Override
-    double getHeight() {
-        return getRadius();
+    public double getHeight() {
+        return maxAxis;
     }
 
     @Override
@@ -46,9 +47,6 @@ public abstract class Ellipse extends Figure {
         return centerPoint;
     }
 
-    public double getRadius() {
-        return radius;
-    }
 
     @Override
     public void moveTo(double x, double y) {

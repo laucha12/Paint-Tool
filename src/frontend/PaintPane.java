@@ -13,6 +13,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PaintPane extends BorderPane {
 
 	// BackEnd
@@ -26,11 +30,8 @@ public class PaintPane extends BorderPane {
 
 	// Botones Barra Izquierda
 	ToggleButton selectionButton = new ToggleButton("Seleccionar");
-	ToggleButton rectangleButton = new ToggleButton("Rectángulo");
-	ToggleButton circleButton = new ToggleButton("Círculo");
 
-	// Dibujar una figura
-	Point startPoint;
+	Buttons actual;
 
 	// Seleccionar una figura
 	Figure selectedFigure;
@@ -38,52 +39,53 @@ public class PaintPane extends BorderPane {
 	// StatusBar
 	StatusPane statusPane;
 
+	Point startPoint;
+
+	 MouseEvent mouseEvent; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
+
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
+
+		// Itero por todos los botons
+		for(Buttons button : Buttons.values())
+			button.getButton().setOnMouseClicked((e) -> actual = button);
+
 		this.canvasState = canvasState;
 		this.statusPane = statusPane;
-		ToggleButton[] toolsArr = {selectionButton, rectangleButton, circleButton};
+
+		ToggleButton[] toolsArr = {Buttons.SELECCIONAR.getButton(), Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton()};
 		ToggleGroup tools = new ToggleGroup();
+
 		for (ToggleButton tool : toolsArr) {
 			tool.setMinWidth(90);
 			tool.setToggleGroup(tools);
 			tool.setCursor(Cursor.HAND);
 		}
+
 		VBox buttonsBox = new VBox(10);
 		buttonsBox.getChildren().addAll(toolsArr);
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999");
 		buttonsBox.setPrefWidth(100);
 		gc.setLineWidth(1);
+
+
+
 		canvas.setOnMousePressed(event -> {
-			// tomo el primer punto en el que se hace click en la pantalla para guardarlo
-			startPoint = new Point(event.getX(), event.getY());
+			mouseEvent = new MouseEvent(new Point(event.getX(), event.getY()));
 		});
+
 		canvas.setOnMouseReleased(event -> {
-			//toma el segundo punto donde se suelta el mouse para saber donde poder dibujar la figura si la misma
-			//fue seleccionada
-			Point endPoint = new Point(event.getX(), event.getY());
-			if(startPoint == null) {
-				return ;
+
+			//Si no es valido el end point termino, todo crear excepcion corresponde
+			try {
+				mouseEvent.setEndPoint(new Point(event.getX(), event.getY()));
+			} catch (Exception e) {
+				return;
 			}
-			if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
-				return ;
-			}
-			Figure newFigure = null;
-			//TODO tener una variable axuliar con el boton seleccionado o algo similar pues sino seria una serie infinita de if else
-			if(rectangleButton.isSelected()) {
-				// si selecciono el boton de rectangulo anteriormente lo dibuja
-				newFigure = new RectangleFront(startPoint, endPoint,gc);
-			}
-			else if(circleButton.isSelected()) {
-				// si selecciono el boton de circulo lo dibujo
-				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new CircleFront(startPoint, circleRadius,gc);
-			} else {
-				return ;
-			}
-			// dibuja la figura que generaste anteriormente
-			canvasState.addFigure(newFigure);
-			startPoint = null;
+
+			//
+			canvasState.addFigure(actual.getFigure(mouseEvent.getStartPoint(), mouseEvent.getEndPoint(), gc));
+
 			redrawCanvas();
 		});
 		canvas.setOnMouseMoved(event -> {

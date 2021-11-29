@@ -28,7 +28,7 @@ public abstract class Rectangle implements Figure {
 
     @Override
     public Collection<Point> getPoints() {
-        List<Point> toReturn =  new ArrayList<Point>();
+        List<Point> toReturn = new ArrayList<>();
         toReturn.add(topLeft);
         toReturn.add(bottomRight);
         return toReturn;

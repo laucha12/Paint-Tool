@@ -4,22 +4,25 @@ import backend.model.Point;
 
 public class MouseEvent {
 
-    private Point startPoint = null, endPoint = null;
-
-    public MouseEvent(){}  //TODO ver si es necesario este contructor
+    private final Point startPoint;
+    private Point endPoint;
 
     public MouseEvent(Point beginPoint){
         this.startPoint = beginPoint;
     }
 
-    public void setBeginPoint(Point beginPoint) {
-        this.startPoint = beginPoint;
+    public Point getStartPoint() {
+        return startPoint;
     }
 
-    public void setEndPoint(Point endPoint) throws IllegalStateException{
+    public Point getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(Point endPoint) throws Exception{
         this.endPoint = endPoint;
         if(startPoint == null || endPoint.getX() <= startPoint.getX() || endPoint.getY() <= startPoint.getY())  // Le agregamos que no deben ser iguales (antes era < no <=), TODO asegurarnos de esto
-            throw new IllegalStateException("Invalid end point relative to start point");
+            throw new Exception("Invalid end point relative to start point");
     }
 
 }

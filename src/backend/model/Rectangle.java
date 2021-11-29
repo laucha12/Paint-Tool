@@ -55,4 +55,9 @@ public abstract class Rectangle implements Figure {
         bottomRight.moveTo(x, y);
         topLeft.moveTo(x, y);
     }
+    @Override
+    public boolean belongs(Point point){
+        return  point.getX() > this.getTopLeft().getX() && point.getX() < this.getBottomRight().getX() &&
+                point.getY() > this.getTopLeft().getY() && point.getY() < this.getBottomRight().getY();
+    }
 }

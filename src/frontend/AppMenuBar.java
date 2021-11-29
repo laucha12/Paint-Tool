@@ -5,7 +5,7 @@ import javafx.scene.control.*;
 import java.util.Optional;
 
 public class AppMenuBar extends MenuBar {
-
+    // Manejo del meno que tiene arriba el programa
     public AppMenuBar() {
         //crea el menu de arriba del la app
         Menu file = new Menu("Archivo");
@@ -19,6 +19,7 @@ public class AppMenuBar extends MenuBar {
             //espera confirmacion y se queda en ese punto
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()) {
+                //depende que tocaste es si cierra el programa o no
                 if (result.get() == ButtonType.OK) {
                     System.exit(0);
                 }

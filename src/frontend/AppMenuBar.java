@@ -5,22 +5,28 @@ import javafx.scene.control.*;
 import java.util.Optional;
 
 public class AppMenuBar extends MenuBar {
-
+    // Manejo del meno que tiene arriba el programa
     public AppMenuBar() {
+        //crea el menu de arriba del la app
         Menu file = new Menu("Archivo");
         MenuItem exitMenuItem = new MenuItem("Salir");
         exitMenuItem.setOnAction(event -> {
+            //si tocaste para salir te tira una confimation alert
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Salir");
             alert.setHeaderText("Salir de la aplicación");
             alert.setContentText("¿Está seguro que desea salir de la aplicación?");
+            //espera confirmacion y se queda en ese punto
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()) {
+                //depende que tocaste es si cierra el programa o no
                 if (result.get() == ButtonType.OK) {
                     System.exit(0);
                 }
             }
         });
+        //opcion de acerde de para que aparece en le menu arriba en la aplicacion
+        // cuando tocamos dicho boton nos tira esta ventana con la alerta
         file.getItems().add(exitMenuItem);
         Menu help = new Menu("Ayuda");
         MenuItem aboutMenuItem = new MenuItem("Acerca De");

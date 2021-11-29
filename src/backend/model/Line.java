@@ -1,4 +1,4 @@
 package backend.model;
 
-public class Line {
+public abstract class Line {
 }

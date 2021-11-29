@@ -1,8 +1,8 @@
 package backend.model;
 
-public class Square extends Rectangle{
+public abstract class Square extends Rectangle{
 
-    public Square(MovablePoint topLeft, MovablePoint bottomRight) {
+    public Square(Point topLeft, Point bottomRight) {
         super(topLeft, bottomRight);
     }
 

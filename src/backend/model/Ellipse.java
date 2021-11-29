@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Ellipse {
+public abstract class Ellipse extends Figure {
 
 
-    protected final MovablePoint centerPoint;
+    protected final Point centerPoint;
     protected final double radius;
 
-    public Ellipse(MovablePoint centerPoint, double radius) {
+    public Ellipse(Point centerPoint, double radius) {
         this.centerPoint = centerPoint;
         this.radius = radius;
     }
@@ -38,7 +38,7 @@ public class Ellipse {
     }
 
     @Override
-    String identifier() {
+    public String identifier() {
         return null;
     }
 

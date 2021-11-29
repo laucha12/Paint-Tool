@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Rectangle extends Figure {
+public abstract class Rectangle extends Figure {
 
-    private final MovablePoint topLeft, bottomRight;
+    private final Point topLeft, bottomRight;
 
-    public Rectangle(MovablePoint topLeft, MovablePoint bottomRight) {
+    public Rectangle(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
     }

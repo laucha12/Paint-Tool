@@ -1,6 +1,12 @@
 package backend.model;
 
-public class Point {
+public class Point implements Movable{
+
+    @Override
+    public void moveTo(double x, double y) {
+        setX(getX() + x);
+        setY(getY() + y);
+    }
 
     public double x, y;
 
@@ -12,6 +18,7 @@ public class Point {
     public double getX() {
         return x;
     }
+
 
     public double getY() {
         return y;

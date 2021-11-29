@@ -17,4 +17,7 @@ public abstract class Figure implements Movable {
 
     abstract String identifier();
 
+    abstract void display(); //This function is designed such that it's implemented in the front end
+                             //
+
 }

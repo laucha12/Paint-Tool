@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class Circle extends Ellipse {
 
-    public Circle(MovablePoint centerPoint, double radius) {
+    public Circle(Point centerPoint, double radius) {
         super(centerPoint, radius);
     }
 }

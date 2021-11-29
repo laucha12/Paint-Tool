@@ -22,4 +22,11 @@ public class Point {
         return String.format("{%.2f , %.2f}", x, y);
     }
 
+    protected void setX(double x) {
+        this.x = x;
+    }
+
+    protected void setY(double y) {
+        this.y = y;
+    }
 }

@@ -1,6 +1,5 @@
 package frontend;
 
-import backend.CanvasState;
 import backend.model.Circle;
 import backend.model.Figure;
 import backend.model.Point;

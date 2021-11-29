@@ -1,6 +1,5 @@
 package frontend;
 
-import backend.CanvasState;
 import javafx.scene.layout.VBox;
 
 // Define el VBox principal que maneja AppMenuBar (el menu superior con la opcion de salir o about) y

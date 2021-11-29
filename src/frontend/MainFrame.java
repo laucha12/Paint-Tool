@@ -15,8 +15,9 @@ public class MainFrame extends VBox {
         StatusPane statusPane = new StatusPane();                   //Creo un nuevo StatusPanel para mantener informacion en
                                                                     // el VBox sobre la current figure o cursor del mouse
 
-        getChildren().add(new PaintPane(canvasState, statusPane));
-        getChildren().add(statusPane);
+        getChildren().add(new PaintPane(canvasState, statusPane));  //Agrego el panel donde dibujo las figuras para que se renderise
+
+        getChildren().add(statusPane);                              //Agrego el panel de status para que se renderise
     }
 
 }

@@ -45,14 +45,16 @@ public class PaintPane extends BorderPane {
 
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
 
+		this.canvasState = canvasState;
+		this.statusPane = statusPane;
+
+		// ESTO VA METIDO EN UNA CLASE
+
 		// Itero por todos los botons
 		for(Buttons button : Buttons.values())
 			button.getButton().setOnMouseClicked((e) -> actual = button);
 
-		this.canvasState = canvasState;
-		this.statusPane = statusPane;
-
-		ToggleButton[] toolsArr = {Buttons.SELECCIONAR.getButton(), Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton()};
+		ToggleButton[] toolsArr = {selectionButton, Buttons.SELECCIONAR.getButton(), Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton()};
 		ToggleGroup tools = new ToggleGroup();
 
 		for (ToggleButton tool : toolsArr) {
@@ -130,6 +132,7 @@ public class PaintPane extends BorderPane {
 				redrawCanvas();
 			}
 		});
+
 		canvas.setOnMouseDragged(event -> {
 			//lo que hace es determinar el evento que se va a probocar en el momento
 			// en el que el mouse se se mueva con una figura adentro

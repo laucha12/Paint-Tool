@@ -180,6 +180,10 @@ public class PaintPanel extends BorderPane {
 			}
 		});
 
+		figureColor.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setColor("#" + Double.toHexString(figureColor.getValue().getRed()) + Double.toHexString(figureColor.getValue().getGreen()) + Double.toHexString(figureColor.getValue().getBlue()))));
+		figureStrokeColor.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setStrokeColor("#" + Double.toHexString(figureStrokeColor.getValue().getRed()) + Double.toHexString(figureStrokeColor.getValue().getGreen()) + Double.toHexString(figureStrokeColor.getValue().getBlue()))));
+		figureStrokeWidth.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue())));
+
 		setLeft(buttonsBox);
 		setRight(canvas);
 	}

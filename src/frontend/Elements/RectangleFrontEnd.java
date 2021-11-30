@@ -4,9 +4,9 @@ import backend.model.Point;
 import backend.model.Rectangle;
 import javafx.scene.canvas.GraphicsContext;
 
-public class RectangleFront extends Rectangle implements FrontRectangle{
+public class RectangleFrontEnd extends Rectangle implements PrintPolygons {
     private GraphicsContext gc;
-    public RectangleFront(Point topLeft, Point bottomRight,GraphicsContext gc) {
+    public RectangleFrontEnd(Point topLeft, Point bottomRight, GraphicsContext gc) {
         super(topLeft,bottomRight);
         this.gc=gc;
     }

@@ -4,11 +4,11 @@ import backend.model.Ellipse;
 import backend.model.Point;
 import javafx.scene.canvas.GraphicsContext;
 
-public class EllipseFront extends Ellipse implements FrontCircle {
+public class EllipseFrontEnd extends Ellipse implements PrintOvals {
 
     private final GraphicsContext graphicsContext;
 
-    EllipseFront(GraphicsContext graphicsContext, Point middlePoint, double minAxis,double maxAxis) {
+    EllipseFrontEnd(GraphicsContext graphicsContext, Point middlePoint, double minAxis, double maxAxis) {
         super(middlePoint, minAxis, maxAxis);
         this.graphicsContext = graphicsContext;
     }

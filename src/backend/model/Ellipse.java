@@ -52,6 +52,7 @@ public abstract class Ellipse implements Figure {
     public void moveTo(double x, double y) {
         centerPoint.moveTo(x,y);
     }
+
     @Override
     public boolean belongs(Point point){
          return ((Math.pow(this.getCenterPoint().getX() - point.getX(), 2)/Math.pow(getHeight(),2) ) +

@@ -8,7 +8,7 @@ public class Point implements Movable{
         setY(getY() + y);
     }
 
-    public double x, y;
+    private double x, y;
 
     public Point(double x, double y) {
         this.x = x;

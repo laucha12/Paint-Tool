@@ -2,36 +2,45 @@ package frontend;
 
 import backend.model.Figure;
 import backend.model.Point;
-import frontend.Elements.CircleFront;
-import frontend.Elements.RectangleFront;
-import frontend.Elements.SquareFront;
+import frontend.Elements.CircleFrontEnd;
+import frontend.Elements.LineFrontEnd;
+import frontend.Elements.RectangleFrontEnd;
+import frontend.Elements.SquareFrontEnd;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ToggleButton;
 
 public enum Buttons {
     RECTANGLE("Rectangulo") {
         public Figure  getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
-            return new RectangleFront(startPoint, endPoint, gc);
+            return new RectangleFrontEnd(startPoint, endPoint, gc);
         }
     },
     SQUARE("Cuadrado") {
         public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
-            return new SquareFront(startPoint, endPoint, gc);
+            return new SquareFrontEnd(startPoint, endPoint, gc);
         }
     },
     CIRCLE("Circulo") {
         @Override
         public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
             double radius = Math.abs(endPoint.getX() - startPoint.getX());
-            return new CircleFront(startPoint, radius, gc);
+            return new CircleFrontEnd(startPoint, radius, gc);
         }
     },
-    SELECCIONAR( "Seleccionar") {
+    ELLIPSE("Ellipse") {
         @Override
         public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
-            throw new RuntimeException();
+            double radius = Math.abs(endPoint.getX() - startPoint.getX());
+            return new CircleFrontEnd(startPoint, radius, gc);
         }
-    };
+    },
+    LINE("Linea") {
+        @Override
+        public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
+            return new LineFrontEnd(startPoint, endPoint, gc);
+        }
+    }
+    ;
 
     private final String name;
     private final ToggleButton button;

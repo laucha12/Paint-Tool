@@ -86,7 +86,6 @@ public class PaintPanel extends BorderPane {
 
 			mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
 
-
 			canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
 
 			redrawCanvas();
@@ -129,13 +128,13 @@ public class PaintPanel extends BorderPane {
 
 		canvas.setOnMouseDragged(event -> {
 			if(selectionButton.isSelected()) {
-				Point eventPoint = new Point(event.getX(), event.getY());
-				double diffX = (eventPoint.getX() - mouseEventPressed.getStartPoint().getX()) / 100;     // calculamos la distancia para saber hacia donde hay que moverla
-				double diffY = (eventPoint.getY() - mouseEventPressed.getStartPoint().getY()) / 100;
-				selectedFigure.moveTo( diffX, diffY);                 // movemos la figura llamando a un metodo de la misma
-				redrawCanvas();                                      // redibujamos todas las figuras pues las mismas tienen un orden de dibujo
+				selectedFigure.moveTo( event.getX() / 100, event.getY() / 100);
+				// movemos la figura llamando a un metodo de la misma
+				redrawCanvas();
+				// redibujamos todas las figuras pues las mismas tienen un orden de dibujo
 			}
 		});
+
 		setLeft(buttonsBox);
 		setRight(canvas);
 	}

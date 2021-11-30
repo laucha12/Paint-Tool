@@ -1,8 +1,6 @@
 package frontend;
 
 import backend.model.*;
-import frontend.Elements.CircleFront;
-import frontend.Elements.RectangleFront;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -12,10 +10,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class PaintPane extends BorderPane {
 

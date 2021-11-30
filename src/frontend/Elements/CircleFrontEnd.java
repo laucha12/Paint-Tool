@@ -5,11 +5,11 @@ import backend.model.Circle;
 import backend.model.Point;
 import javafx.scene.canvas.GraphicsContext;
 
-public class CircleFront extends Circle implements FrontCircle{
+public class CircleFrontEnd extends Circle implements PrintOvals {
 
     private final GraphicsContext graphicsContext;
 
-    public CircleFront(Point centerPoint, double radius, GraphicsContext gc) {
+    public CircleFrontEnd(Point centerPoint, double radius, GraphicsContext gc) {
         super(centerPoint, radius);
         graphicsContext = gc;
     }

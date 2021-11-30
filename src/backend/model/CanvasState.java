@@ -9,6 +9,7 @@ public class CanvasState {
 
     //Guarda una lista con las figuras que estan presentes en el canvas
     private final List<Figure> list = new ArrayList<>();
+    //TIENE QUE SER UNA LINKED LIST PARA INSERTAR ADELANTE DE TODO, PUNTO 4
 
     public void addFigure(Figure figure) {
         list.add(figure);
@@ -20,3 +21,5 @@ public class CanvasState {
     }
 
 }
+
+//PUNTO 3, BORRAR DEL CANVAS Y VOLVER A REDRAWEAR()

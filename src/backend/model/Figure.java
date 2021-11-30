@@ -2,7 +2,7 @@ package backend.model;
 
 import java.util.Collection;
 
-public interface Figure extends Movable {
+public interface Figure extends Movable, Drawable{
 /*
     @Override
     default String toString(){
@@ -17,7 +17,5 @@ public interface Figure extends Movable {
 
      String identifier();
 
-     void display(); //This function is designed such that it's implemented in the front end
-                             //
      boolean belongs(Point point);
 }

@@ -10,11 +10,12 @@ public interface Colorable {
 
     void setStrokeColor(String other);
 
-    default String defaultColor() {
+    static String defaultColor() {
         return "#FFFF00";
     }
 
-    default String defaultStrokeColor() {
+    static String defaultStrokeColor() {
         return "#000000";
     }
+
 }

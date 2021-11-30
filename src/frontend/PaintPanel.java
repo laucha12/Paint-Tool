@@ -11,6 +11,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -31,9 +32,10 @@ public class PaintPanel extends BorderPane {
 
 	FigureButtons actual;
 
-	ColorPicker colorPicker = new ColorPicker();
-	ColorPicker strokePicker = new ColorPicker();
-	Slider slider = new Slider();
+	//Creamos los selectores de color y de ancho, con los valores por defecto
+	ColorPicker figureColor = new ColorPicker(Color.web(Colorable.defaultColor()));
+	ColorPicker figureStrokeColor = new ColorPicker(Color.web(Colorable.defaultStrokeColor()));
+	Slider figureStrokeWidth = new Slider(0, Figure.getMaxStroke(),Figure.getDefaultStrokeWidth());
 
 	// Seleccionar una figura
 	Figure selectedFigure;
@@ -59,6 +61,7 @@ public class PaintPanel extends BorderPane {
 				FigureButtons.ELLIPSE.getButton(), FigureButtons.SQUARE.getButton()};
 
 
+
 		//FUNCIONALIDAD DE JAVA FX
 
 		ToggleGroup tools = new ToggleGroup();
@@ -70,9 +73,10 @@ public class PaintPanel extends BorderPane {
 		}
 
 		buttonsBox.getChildren().addAll(toolsArr);
-		buttonsBox.getChildren().add(slider);
-		buttonsBox.getChildren().add(strokePicker);
-		buttonsBox.getChildren().add(colorPicker);
+		//Agrego seleccionadores de colores
+		buttonsBox.getChildren().add(figureColor);
+		buttonsBox.getChildren().add(figureStrokeColor);
+		buttonsBox.getChildren().add(figureStrokeWidth);
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999");
 		buttonsBox.setPrefWidth(100);
@@ -86,6 +90,7 @@ public class PaintPanel extends BorderPane {
 		this.statusPane = statusPane;
 
 		setupButtons();
+
 
 		clearButton.setOnMouseClicked((e) -> {
 			gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());

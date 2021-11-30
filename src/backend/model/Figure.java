@@ -4,8 +4,10 @@ import java.util.Collection;
 
 public abstract class Figure implements Movable, Drawable, Colorable{
 
+     private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 20.0;
      private String color="#FFFF00", strokeColor="#000000";
      private boolean isSelected = false;
+     private double strokeWidth = DEFAULT_STROKE;
 
      @Override
      public String toString(){
@@ -28,6 +30,22 @@ public abstract class Figure implements Movable, Drawable, Colorable{
      }
 
      public boolean isSelected() { return isSelected; }
+
+     public void setStrokeWidth(double strokeWidth) {
+          this.strokeWidth = strokeWidth;
+     }
+
+     public double getStrokeWidth(){
+          return strokeWidth;
+     }
+
+     public static double getDefaultStrokeWidth(){
+          return DEFAULT_STROKE;
+     }
+
+     public static double getMaxStroke(){
+          return MAX_STROKE;
+     }
 
      @Override
      public String getColor() {

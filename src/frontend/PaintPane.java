@@ -39,7 +39,7 @@ public class PaintPane extends BorderPane {
 	// StatusBar
 	StatusPane statusPane;
 
-	Point startPoint;
+	//Point startPoint;
 
 	 MouseEvent mouseEvent; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
 
@@ -54,7 +54,7 @@ public class PaintPane extends BorderPane {
 		for(Buttons button : Buttons.values())
 			button.getButton().setOnMouseClicked((e) -> actual = button);
 
-		ToggleButton[] toolsArr = {selectionButton, Buttons.SELECCIONAR.getButton(), Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton()};
+		ToggleButton[] toolsArr = {selectionButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton()};
 		ToggleGroup tools = new ToggleGroup();
 
 		for (ToggleButton tool : toolsArr) {
@@ -74,6 +74,7 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMousePressed(event -> {
 			mouseEvent = new MouseEvent(new Point(event.getX(), event.getY()));
+			//startPoint = new Point(event.getX(), event.getY());
 		});
 
 		canvas.setOnMouseReleased(event -> {
@@ -140,8 +141,8 @@ public class PaintPane extends BorderPane {
 			//TODO Esta mal como lo hace debemos ponerlo directamente en la clase figure
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
-				double diffX = (eventPoint.getX() - startPoint.getX()) / 100;
-				double diffY = (eventPoint.getY() - startPoint.getY()) / 100;
+				double diffX = (eventPoint.getX() - mouseEvent.getStartPoint().getX()) / 100;
+				double diffY = (eventPoint.getY() - mouseEvent.getStartPoint().getY()) / 100;
 				selectedFigure.moveTo(diffX,diffY);
 				redrawCanvas();
 			}

@@ -25,12 +25,6 @@ public enum Buttons {
             double radius = Math.abs(endPoint.getX() - startPoint.getX());
             return new CircleFront(startPoint, radius, gc);
         }
-    },
-    SELECCIONAR( "Seleccionar") {
-        @Override
-        public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
-            throw new RuntimeException();
-        }
     };
 
     private final String name;

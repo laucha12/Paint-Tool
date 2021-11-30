@@ -12,6 +12,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+
 public class PaintPanel extends BorderPane {
 
 	// BackEnd
@@ -38,6 +40,8 @@ public class PaintPanel extends BorderPane {
 
 	// StatusBar
 	StatusPanel statusPane;
+
+	ArrayList<Figure> figureSelected= new ArrayList<>();
 
 	MouseEvent mouseEventPressed; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
 
@@ -134,17 +138,16 @@ public class PaintPanel extends BorderPane {
 				for (Figure figure : canvasState.figures()) {   			//Itera para buscar dentro de las figuras de la canvas
 					if(figure.belongs(eventPoint)) {					//Si encontro la figuar
 						found = true;
-						selectedFigure = figure;
 						figure.select();
 						label.append(figure.toString());
+						figureSelected.add(figure);
 					}
 				}
 				if (found) {
 					statusPane.updateStatus(label.toString());				//Actualiza el estado si encontro la figura
 				} else {
-					if (selectedFigure != null)
-						selectedFigure.setStrokeColor("#000000");          
-					selectedFigure = null;
+					//cuando se hace un click fuera de una figura se deselecciona las figuras
+					unSelect();
 					statusPane.updateStatus("Ninguna figura encontrada");  //Actualiza el estado si no encontro la figura
 				}
 				redrawCanvas();
@@ -158,8 +161,8 @@ public class PaintPanel extends BorderPane {
 				double diffY = (event.getY() - mouseEventPressed.getY()) / 100;
 
 				// movemos la figura llamando a un metodo de la misma
-				selectedFigure.moveTo(diffX, diffY);
-
+				for (Figure aux:figureSelected)
+					aux.moveTo(diffX,diffY);
 				// redibujamos todas las figuras pues las mismas tienen un orden de dibujo
 				redrawCanvas();
 			}
@@ -168,7 +171,13 @@ public class PaintPanel extends BorderPane {
 		setLeft(buttonsBox);
 		setRight(canvas);
 	}
-
+     void unSelect(){
+		//le cambio el borde a negro de las figuras que estaban seleccionadas
+		 for (Figure aux:figureSelected)
+			 aux.setStrokeColor("#000000");
+			//limpio las figuras seleccion
+		 figureSelected.clear();
+	 }
 	//Ippo: Quedo hermoso
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());

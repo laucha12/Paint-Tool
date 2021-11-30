@@ -8,7 +8,7 @@ public abstract class Square extends Rectangle{
 
     @Override
     public String toString() {
-        return "Cuadrado";
+        return String.format("Cuadrado de lados %g",Math.abs(getTopLeft().getX()-getBottomRight().getX()));
     }
 
 }

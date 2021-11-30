@@ -4,6 +4,7 @@ package frontend.Elements;
 import backend.model.Circle;
 import backend.model.Point;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class CircleFrontEnd extends Circle implements PrintOvals {
 
@@ -16,6 +17,6 @@ public class CircleFrontEnd extends Circle implements PrintOvals {
 
     @Override
     public void display() {
-        print(graphicsContext, getCenterPoint(), getRadius(), getRadius());
+        print(graphicsContext, getCenterPoint(), getRadius(), getRadius(), Color.web(getColor()), Color.web(getStrokeColor()));
     }
 }

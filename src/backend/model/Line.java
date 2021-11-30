@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Line implements Figure{
+public abstract class Line extends Figure{
 
     private Point start, end;
     private static final double WIDTH = 10;
@@ -52,4 +52,8 @@ public abstract class Line implements Figure{
         start.moveTo(x, y);
         end.moveTo(x, y);
     }
+
+
+
+
 }

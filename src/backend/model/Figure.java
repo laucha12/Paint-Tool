@@ -2,20 +2,47 @@ package backend.model;
 
 import java.util.Collection;
 
-public interface Figure extends Movable, Drawable{
-/*
-    @Override
-    default String toString(){
-        return identifier() + "[" + getPoints() + "]";
-    }*/
+public abstract class Figure implements Movable, Drawable, Colorable{
 
-     Collection<Point> getPoints();
+     private String color, strokeColor;
 
-     double getWidth();
+     @Override
+     public String toString(){
+          return identifier() + "[" + getPoints() + "]";
+     }
 
-     double getHeight();
+     abstract public Collection<Point> getPoints();
 
-     String identifier();
+     abstract public double getWidth();
 
-     boolean belongs(Point point);
+     abstract public double getHeight();
+
+     abstract public String identifier();
+
+     abstract public boolean belongs(Point point);
+
+     public void isSelected() {
+          setStrokeColor("#A52A2A");
+     }
+
+     @Override
+     public String getColor() {
+          return color;
+     }
+
+     @Override
+     public void setColor(String other) {
+          color = other;
+     }
+
+     @Override
+     public String getStrokeColor() {
+          return strokeColor;
+     }
+
+     @Override
+     public void setStrokeColor(String other) {
+          strokeColor = other;
+     }
+
 }

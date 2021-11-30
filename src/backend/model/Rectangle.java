@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Rectangle implements Figure {
+public abstract class Rectangle extends Figure {
 
     private final Point topLeft, bottomRight;
 

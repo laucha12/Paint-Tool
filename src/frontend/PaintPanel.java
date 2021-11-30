@@ -132,7 +132,7 @@ public class PaintPanel extends BorderPane {
 				double diffY = (event.getY() - mouseEventPressed.getY()) / 100;
 
 				// movemos la figura llamando a un metodo de la misma
-				selectedFigure.moveTo(  diffX, diffY);
+				selectedFigure.moveTo(diffX, diffY);
 
 				// redibujamos todas las figuras pues las mismas tienen un orden de dibujo
 				redrawCanvas();

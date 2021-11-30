@@ -6,13 +6,12 @@ public class MouseEvent {
 
     private final Point startPoint;
     private Point endPoint;
-    private final static int REDRAW_FACTOR = 100;
-    private final double xDragged;
-    private double yDragged;
+    private final double x, y;
 
     public MouseEvent(Point beginPoint){
         this.startPoint = beginPoint;
-        this.xDragged = beginPoint.getX() ;
+        this.x = beginPoint.getX() ;
+        this.y = beginPoint.getY();
     }
 
     public Point getStartPoint() {
@@ -25,14 +24,13 @@ public class MouseEvent {
 
     public void setEndPoint(Point endPoint) {
         this.endPoint = endPoint;
-        this.yDragged = endPoint.getY();
     }
 
-    public double getXDragged(){
-        return xDragged;
+    public double getX(){
+        return x;
     }
 
-    public double getYDragged() {
-        return yDragged;
+    public double getY() {
+        return y;
     }
 }

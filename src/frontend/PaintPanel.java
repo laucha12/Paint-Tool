@@ -81,6 +81,7 @@ public class PaintPanel extends BorderPane {
 				return;
 			}
 
+
 			canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
 
 			redrawCanvas();
@@ -111,6 +112,8 @@ public class PaintPanel extends BorderPane {
 				if (found) {
 					statusPane.updateStatus(label.toString());				//Actualiza el estado si encontro la figura
 				} else {
+					if (selectedFigure != null)
+						selectedFigure.setStrokeColor("#000000");          
 					selectedFigure = null;
 					statusPane.updateStatus("Ninguna figura encontrada");  //Actualiza el estado si no encontro la figura
 				}
@@ -136,13 +139,6 @@ public class PaintPanel extends BorderPane {
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures()) {								//al canvasState le pido las figuras e itero sobre ellas
-			/*if(figure == selectedFigure) {											//Si la figura es la seleccionada, el stroke se lo hago rojo
-				gc.setStroke(Color.RED);
-			}
-			else {
-				gc.setStroke(lineColor);											//Si no el lineColor (que por ahora es negro xq es el por defecto)
-			}
-			gc.setFill(fillColor);*/
 			figure.display();         												// dibujamos la figura en la pantalla
 		}
 	}

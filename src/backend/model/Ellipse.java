@@ -9,13 +9,11 @@ public abstract class Ellipse extends Figure {
 
     protected final Point centerPoint;
     protected final double minAxis, maxAxis;
-    //private String color, strokeColor;
 
     public Ellipse(Point centerPoint, double minAxis, double maxAxis) {
         this.centerPoint = centerPoint;
         this.maxAxis = maxAxis;
         this.minAxis = minAxis;
-        //this.color = defaultColor();
     }
 
     @Override
@@ -61,19 +59,6 @@ public abstract class Ellipse extends Figure {
                  (Math.pow(this.getCenterPoint().getY() - point.getY(), 2)/Math.pow(getWidth(),2)) ) <= 1;
 
     }
-
-    /*public String color() {
-        return color;
-    }
-
-    public void defineColor(String other){
-        color = other;
-    }*/
-
-
-    //String strokeColor();
-
-    //void defineStrokeColor(String other);
 
 
 }

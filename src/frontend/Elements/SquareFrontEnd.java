@@ -3,6 +3,7 @@ package frontend.Elements;
 import backend.model.Point;
 import backend.model.Square;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class SquareFrontEnd extends Square implements PrintPolygons {
     private GraphicsContext gc;
@@ -13,6 +14,6 @@ public class SquareFrontEnd extends Square implements PrintPolygons {
     }
     @Override
     public void display() {
-        print(gc,this.getTopLeft(),this.getWidth(),this.getHeight());
+        print(gc,this.getTopLeft(),this.getWidth(),this.getHeight(), Color.web(getColor()),Color.web(getStrokeColor()));
     }
 }

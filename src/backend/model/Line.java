@@ -37,7 +37,11 @@ public abstract class Line extends Figure{
     }
 
     public boolean belongs(Point point){
-        return false;
+
+        double m = ( this.getStart().getY() - getEnd().getY() ) / ( this.getStart().getX() - getEnd().getX() );
+        double ordenada = this.getStart().getY() - this.getStart().getX() * m;
+        return Math.abs( point.getY() - ( m * point.getX()+ordenada)) < 2 &&  point.getX() > this.getStart().getX() && point.getX() < this.getEnd().getX() &&
+                point.getY() > this.getStart().getY() && point.getY() < this.getEnd().getY() ;
     }
 
     public Collection<Point> getPoints(){

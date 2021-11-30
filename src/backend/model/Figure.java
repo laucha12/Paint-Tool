@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public abstract class Figure implements Movable, Drawable, Colorable{
 
-     private String color, strokeColor;
+     private String color="#FFFF00", strokeColor="#000000";
 
      @Override
      public String toString(){

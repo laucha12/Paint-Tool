@@ -166,7 +166,6 @@ public class PaintPane extends BorderPane {
 	}
 
 
-	//TODO Hay que moverlo al back, haciedno que figure tenga el metodo y que cada tipo de figura lo sobreescriba
 	boolean figureBelongs(Figure figure, Point eventPoint) {
 		return figure.belongs(eventPoint);
 	}

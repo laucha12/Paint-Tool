@@ -6,7 +6,7 @@ import frontend.Elements.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ToggleButton;
 
-public enum Buttons {
+public enum FigureButtons {
     RECTANGLE("Rectangulo") {
         public Figure  getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
             return new RectangleFrontEnd(startPoint, endPoint, gc);
@@ -45,7 +45,7 @@ public enum Buttons {
     private final String name;
     private final ToggleButton button;
 
-    Buttons(String name) {
+    FigureButtons(String name) {
         this.name = name;
         this.button = new ToggleButton(name);
     }

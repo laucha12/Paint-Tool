@@ -5,6 +5,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -25,7 +27,11 @@ public class PaintPanel extends BorderPane {
 	ToggleButton sendToBackButton = new ToggleButton("Al fondo");
 	ToggleButton sendToFrontButton = new ToggleButton("Al frente");
 
-	Buttons actual;
+	FigureButtons actual;
+
+	ColorPicker colorPicker = new ColorPicker();
+	ColorPicker strokePicker = new ColorPicker();
+	Slider slider = new Slider();
 
 	// Seleccionar una figura
 	Figure selectedFigure;
@@ -39,16 +45,17 @@ public class PaintPanel extends BorderPane {
 
 	private void setupButtons(){
 
-		// ESTO VA METIDO EN UNA CLASE
 
 		// Itero por todos los botons
-		for(Buttons button : Buttons.values())
+		for(FigureButtons button : FigureButtons.values())
 			button.getButton().setOnMouseClicked((e) -> actual = button);
 
-		ToggleButton[] toolsArr = {selectionButton, clearButton, sendToBackButton, sendToFrontButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton(), Buttons.LINE.getButton(),
-				Buttons.ELLIPSE.getButton(), Buttons.SQUARE.getButton()};
 
-		//sendToBack.setOnMouseClicked((e) -> );
+		ToggleButton[] toolsArr = {selectionButton, clearButton, sendToBackButton, sendToFrontButton, FigureButtons.CIRCLE.getButton(), FigureButtons.RECTANGLE.getButton(), FigureButtons.LINE.getButton(),
+				FigureButtons.ELLIPSE.getButton(), FigureButtons.SQUARE.getButton()};
+
+
+		//FUNCIONALIDAD DE JAVA FX
 
 		ToggleGroup tools = new ToggleGroup();
 
@@ -59,6 +66,9 @@ public class PaintPanel extends BorderPane {
 		}
 
 		buttonsBox.getChildren().addAll(toolsArr);
+		buttonsBox.getChildren().add(slider);
+		buttonsBox.getChildren().add(strokePicker);
+		buttonsBox.getChildren().add(colorPicker);
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999");
 		buttonsBox.setPrefWidth(100);

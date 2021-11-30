@@ -20,6 +20,10 @@ public class CanvasState {
         return new ArrayList<>(list);
     }
 
+    public void clear() {
+        list.clear();
+    }
+
 }
 
 //PUNTO 3, BORRAR DEL CANVAS Y VOLVER A REDRAWEAR()

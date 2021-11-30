@@ -3,6 +3,7 @@ package backend.model;
 import backend.model.Figure;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CanvasState {
@@ -20,6 +21,35 @@ public class CanvasState {
         return new ArrayList<>(list);
     }
 
+    //Nuevos metodos creados:
+    /*public void sendFigureToBack(Figure figure){
+        list.remove(figure);
+        list.add(0,figure);
+    }*/
+
+    public void sendFigureToBack(Figure figure){
+        list.remove(figure);
+        List<Figure> aux = new ArrayList<>(list);
+        list.clear();
+        list.add(figure);
+        list.addAll(aux);
+    }
+
+
+    public void sendFigureToFront(Figure figure){
+        list.remove(figure);
+        list.add(figure);
+    }
+
+    public void sendMultipleFiguresToBack(Collection<Figure> figures){
+        figures.forEach(this::sendFigureToBack);
+    }
+
+    public void sendMultipleFiguresToFront(Collection<Figure> figures){
+        figures.forEach(this::sendFigureToFront);
+    }
+
+
     public void clear() {
         list.clear();
     }
@@ -27,3 +57,11 @@ public class CanvasState {
 }
 
 //PUNTO 3, BORRAR DEL CANVAS Y VOLVER A REDRAWEAR()
+
+
+
+/*
+* Modificaciones para el punto 4:
+*   Se cambia el ArrayList por un LinkedList. De esta forma podemos hacer que un elemento vaya al comienzo o al final de la lista.
+*
+* */

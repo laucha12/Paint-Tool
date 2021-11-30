@@ -143,14 +143,14 @@ public class PaintPanel extends BorderPane {
 		setRight(canvas);
 	}
 
-
+	//Ippo: Quedo hermoso
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures())								//al canvasState le pido las figuras e itero sobre ellas
 			figure.display();         												// dibujamos la figura en la pantalla
 	}
 
-
+	//TODO: Vale la pena este metodo? Se puede invocar directamente tiendo la figura y el boton
 	boolean figureBelongs(Figure figure, Point eventPoint) {
 		return figure.belongs(eventPoint);                    //la figura nos dice si contiene a un punto
 	}

@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class PaintPane extends BorderPane {
+public class PaintPanel extends BorderPane {
 
 	// BackEnd
 	CanvasState canvasState;
@@ -31,13 +31,13 @@ public class PaintPane extends BorderPane {
 	Figure selectedFigure;
 
 	// StatusBar
-	StatusPane statusPane;
+	StatusPanel statusPane;
 
-	//Point startPoint;
 
-	 MouseEvent mouseEvent; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
+	MouseEvent mouseEventPressed; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
+	MouseEvent mouseEventMoved;
 
-	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
+	public PaintPanel(CanvasState canvasState, StatusPanel statusPane) {
 
 		this.canvasState = canvasState;
 		this.statusPane = statusPane;
@@ -50,6 +50,7 @@ public class PaintPane extends BorderPane {
 
 		ToggleButton[] toolsArr = {selectionButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton(), Buttons.LINE.getButton(),
 									Buttons.ELLIPSE.getButton(), Buttons.SQUARE.getButton()};
+
 		ToggleGroup tools = new ToggleGroup();
 
 		for (ToggleButton tool : toolsArr) {
@@ -68,7 +69,7 @@ public class PaintPane extends BorderPane {
 
 
 		canvas.setOnMousePressed(event -> {
-			mouseEvent = new MouseEvent(new Point(event.getX(), event.getY()));
+			mouseEventPressed = new MouseEvent(new Point(event.getX(), event.getY()));
 			//startPoint = new Point(event.getX(), event.getY());
 		});
 
@@ -76,24 +77,27 @@ public class PaintPane extends BorderPane {
 
 			//Si no es valido el end point termino, todo crear excepcion corresponde
 			try {
-				mouseEvent.setEndPoint(new Point(event.getX(), event.getY()));
+				mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
 			} catch (Exception e) {
 				return;
 			}
 
 			//
-			canvasState.addFigure(actual.getFigure(mouseEvent.getStartPoint(), mouseEvent.getEndPoint(), gc));
+			canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
 
 			redrawCanvas();
 		});
+
 		canvas.setOnMouseMoved(event -> {
 			// toma el punto en el que esta en el movimiento
 			Point eventPoint = new Point(event.getX(), event.getY());
+			mouseEventMoved = new MouseEvent(eventPoint);
+
 			boolean found = false;
 			StringBuilder label = new StringBuilder();
 			for(Figure figure : canvasState.figures()) {
 				// si esta arriba de una figura muestra que esta arriba de la misma
-				if(figureBelongs(figure, eventPoint)) {
+				if(figure.belongs(eventPoint)) {
 					found = true;
 					label.append(figure.toString());
 				}
@@ -136,8 +140,8 @@ public class PaintPane extends BorderPane {
 			//TODO Esta mal como lo hace debemos ponerlo directamente en la clase figure
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
-				double diffX = (eventPoint.getX() - mouseEvent.getStartPoint().getX()) / 100;
-				double diffY = (eventPoint.getY() - mouseEvent.getStartPoint().getY()) / 100;
+				double diffX = (eventPoint.getX() - mouseEventPressed.getStartPoint().getX()) / 100;
+				double diffY = (eventPoint.getY() - mouseEventPressed.getStartPoint().getY()) / 100;
 				selectedFigure.moveTo(diffX,diffY);
 				redrawCanvas();
 			}

@@ -8,13 +8,13 @@ import javafx.scene.layout.BorderPane;
 //ES LA POSICION DEL MOUSE O SI ESTA DENTRO DE UNA FIGURA (CUYO CASO TAMBIEN TENDRIA
 //QUE ALMACENAR A CANVAS_STATE ACA)
 
-public class StatusPane extends BorderPane {
+public class StatusPanel extends BorderPane {
 
 	private final Label statusLabel;
 	private static final String DEFAULT_PANEL_STRING = "Paint 1.0";
 
 	//Defino como se renderisa el panel de status, la posicion color y tamaniio de letra
-	public StatusPane() {
+	public StatusPanel() {
 		setStyle("-fx-background-color: #4EBCF8");
 		statusLabel = new Label(DEFAULT_PANEL_STRING);
 		statusLabel.setAlignment(Pos.CENTER);

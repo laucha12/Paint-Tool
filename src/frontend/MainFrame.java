@@ -12,7 +12,7 @@ public class MainFrame extends VBox {
 
         getChildren().add(new AppMenuBar());                        //Agrego el AppMenuBar al VBox para que se renderise
 
-        StatusPanel statusPane = new StatusPanel();                   //Creo un nuevo StatusPanel para mantener informacion en
+        StatusPanel statusPane = new StatusPanel(canvasState);      //Creo un nuevo StatusPanel para mantener informacion en
                                                                     // el VBox sobre la current figure o cursor del mouse
 
         getChildren().add(new PaintPanel(canvasState, statusPane));  //Agrego el panel donde dibujo las figuras para que se renderise

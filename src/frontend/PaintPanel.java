@@ -70,7 +70,6 @@ public class PaintPanel extends BorderPane {
 
 		canvas.setOnMousePressed(event -> {
 			mouseEventPressed = new MouseEvent(new Point(event.getX(), event.getY()));
-			//startPoint = new Point(event.getX(), event.getY());
 		});
 
 		canvas.setOnMouseReleased(event -> {
@@ -90,24 +89,7 @@ public class PaintPanel extends BorderPane {
 
 		canvas.setOnMouseMoved(event -> {
 			// toma el punto en el que esta en el movimiento
-			Point eventPoint = new Point(event.getX(), event.getY());
-			mouseEventMoved = new MouseEvent(eventPoint);
-
-			boolean found = false;
-			StringBuilder label = new StringBuilder();
-			for(Figure figure : canvasState.figures()) {
-				// si esta arriba de una figura muestra que esta arriba de la misma
-				if(figure.belongs(eventPoint)) {
-					found = true;
-					label.append(figure.toString());
-				}
-			}
-			if(found) {
-				//si la encuentra updatea el status del label
-				statusPane.updateStatus(label.toString());
-			} else {
-				statusPane.updateStatus(eventPoint.toString());
-			}
+			statusPane.mouseMoved(new Point(event.getX(), event.getY()));
 		});
 
 

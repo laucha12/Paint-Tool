@@ -5,6 +5,7 @@ import java.util.Collection;
 public abstract class Figure implements Movable, Drawable, Colorable{
 
      private String color="#FFFF00", strokeColor="#000000";
+     private boolean isSelected = false;
 
      @Override
      public String toString(){
@@ -21,9 +22,12 @@ public abstract class Figure implements Movable, Drawable, Colorable{
 
      abstract public boolean belongs(Point point);
 
-     public void isSelected() {
+     public void select() {
+          this.isSelected = true;
           setStrokeColor("#A52A2A");
      }
+
+     public boolean isSelected() { return isSelected; }
 
      @Override
      public String getColor() {

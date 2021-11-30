@@ -4,12 +4,13 @@ import backend.model.Figure;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CanvasState {
 
     //Guarda una lista con las figuras que estan presentes en el canvas
-    private final List<Figure> list = new ArrayList<>();
+    private final LinkedList<Figure> list = new LinkedList<>();
     //TIENE QUE SER UNA LINKED LIST PARA INSERTAR ADELANTE DE TODO, PUNTO 4
 
     public void addFigure(Figure figure) {
@@ -29,16 +30,13 @@ public class CanvasState {
 
     public void sendFigureToBack(Figure figure){
         list.remove(figure);
-        List<Figure> aux = new ArrayList<>(list);
-        list.clear();
-        list.add(figure);
-        list.addAll(aux);
+        list.addFirst(figure);
     }
 
 
     public void sendFigureToFront(Figure figure){
         list.remove(figure);
-        list.add(figure);
+        list.addLast(figure);
     }
 
     public void sendMultipleFiguresToBack(Collection<Figure> figures){

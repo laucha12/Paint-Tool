@@ -22,6 +22,8 @@ public class PaintPanel extends BorderPane {
 	// Botones Barra Izquierda
 	ToggleButton selectionButton = new ToggleButton("Seleccionar");
 	ToggleButton clearButton = new ToggleButton("Limpiar");
+	ToggleButton sendToBackButton = new ToggleButton("Al fondo");
+	ToggleButton sendToFrontButton = new ToggleButton("Al frente");
 
 	Buttons actual;
 
@@ -43,8 +45,10 @@ public class PaintPanel extends BorderPane {
 		for(Buttons button : Buttons.values())
 			button.getButton().setOnMouseClicked((e) -> actual = button);
 
-		ToggleButton[] toolsArr = {selectionButton, clearButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton(), Buttons.LINE.getButton(),
+		ToggleButton[] toolsArr = {selectionButton, clearButton, sendToBackButton, sendToFrontButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton(), Buttons.LINE.getButton(),
 				Buttons.ELLIPSE.getButton(), Buttons.SQUARE.getButton()};
+
+		//sendToBack.setOnMouseClicked((e) -> );
 
 		ToggleGroup tools = new ToggleGroup();
 
@@ -72,6 +76,11 @@ public class PaintPanel extends BorderPane {
 		clearButton.setOnMouseClicked((e) -> {
 			gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 			canvasState.clear();
+
+		});
+
+		sendToBackButton.setOnMouseClicked((e) -> {
+
 		});
 
 
@@ -96,6 +105,15 @@ public class PaintPanel extends BorderPane {
 			statusPane.mouseMoved(new Point(event.getX(), event.getY()));
 		});
 
+		sendToBackButton.setOnMouseClicked( (event) -> {
+			if(sendToBackButton.isSelected()){
+				for (Figure figure : canvasState.figures())
+					if(figure.isSelected()) {
+						canvasState.sendFigureToBack(figure);
+					}
+			}
+		});
+
 
 		//TODO fijarse si hay que cambiarlo
 		canvas.setOnMouseClicked(event -> {
@@ -109,7 +127,7 @@ public class PaintPanel extends BorderPane {
 					if(figureBelongs(figure, eventPoint)) {					//Si encontro la figuar
 						found = true;
 						selectedFigure = figure;
-						figure.isSelected();
+						figure.select();
 						label.append(figure.toString());
 					}
 				}

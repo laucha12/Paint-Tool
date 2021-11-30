@@ -22,14 +22,23 @@ public class CanvasState {
     }
 
     //Nuevos metodos creados:
-    public void sendFigureToBack(Figure figure){
+    /*public void sendFigureToBack(Figure figure){
         list.remove(figure);
         list.add(0,figure);
+    }*/
+
+    public void sendFigureToBack(Figure figure){
+        list.remove(figure);
+        List<Figure> aux = new ArrayList<>(list);
+        list.clear();
+        list.add(figure);
+        list.addAll(aux);
     }
+
 
     public void sendFigureToFront(Figure figure){
         list.remove(figure);
-        list.add(list.size(), figure);
+        list.add(figure);
     }
 
     public void sendMultipleFiguresToBack(Collection<Figure> figures){

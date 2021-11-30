@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 
 public class SquareFrontEnd extends Square implements PrintPolygons {
     private GraphicsContext gc;
+
     public SquareFrontEnd(Point topLeft, Point bottomRight, GraphicsContext gc) {
 
         super(topLeft, bottomRight);

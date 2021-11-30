@@ -9,7 +9,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class PaintPanel extends BorderPane {
 
@@ -19,11 +18,10 @@ public class PaintPanel extends BorderPane {
 	// Canvas y relacionados
 	Canvas canvas = new Canvas(800, 600);
 	GraphicsContext gc = canvas.getGraphicsContext2D();
-	Color lineColor = Color.BLACK;
-	Color fillColor = Color.YELLOW;
 
 	// Botones Barra Izquierda
 	ToggleButton selectionButton = new ToggleButton("Seleccionar");
+	ToggleButton clearButton = new ToggleButton("Limpiar");
 
 	Buttons actual;
 
@@ -33,14 +31,11 @@ public class PaintPanel extends BorderPane {
 	// StatusBar
 	StatusPanel statusPane;
 
-
 	MouseEvent mouseEventPressed; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
-	MouseEvent mouseEventMoved;
 
-	public PaintPanel(CanvasState canvasState, StatusPanel statusPane) {
+	VBox buttonsBox = new VBox(10);
 
-		this.canvasState = canvasState;
-		this.statusPane = statusPane;
+	private void setupButtons(){
 
 		// ESTO VA METIDO EN UNA CLASE
 
@@ -48,8 +43,8 @@ public class PaintPanel extends BorderPane {
 		for(Buttons button : Buttons.values())
 			button.getButton().setOnMouseClicked((e) -> actual = button);
 
-		ToggleButton[] toolsArr = {selectionButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton(), Buttons.LINE.getButton(),
-									Buttons.ELLIPSE.getButton(), Buttons.SQUARE.getButton()};
+		ToggleButton[] toolsArr = {selectionButton, clearButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton(), Buttons.LINE.getButton(),
+				Buttons.ELLIPSE.getButton(), Buttons.SQUARE.getButton()};
 
 		ToggleGroup tools = new ToggleGroup();
 
@@ -59,13 +54,25 @@ public class PaintPanel extends BorderPane {
 			tool.setCursor(Cursor.HAND);
 		}
 
-		VBox buttonsBox = new VBox(10);
 		buttonsBox.getChildren().addAll(toolsArr);
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999");
 		buttonsBox.setPrefWidth(100);
 		gc.setLineWidth(1);
 
+	}
+
+	public PaintPanel(CanvasState canvasState, StatusPanel statusPane) {
+
+		this.canvasState = canvasState;
+		this.statusPane = statusPane;
+
+		setupButtons();
+
+		clearButton.setOnMouseClicked((e) -> {
+			gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+			canvasState.clear();
+		});
 
 
 		canvas.setOnMousePressed(event -> {
@@ -74,13 +81,10 @@ public class PaintPanel extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 
-			//Si no es valido el end point termino, todo crear excepcion corresponde
-			try {
-				mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
-			} catch (Exception e) {
+			if(selectionButton.isSelected())
 				return;
-			}
 
+			mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
 
 			canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
 
@@ -124,13 +128,13 @@ public class PaintPanel extends BorderPane {
 
 		canvas.setOnMouseDragged(event -> {
 			if(selectionButton.isSelected()) {
-				Point eventPoint = new Point(event.getX(), event.getY());
-				double diffX = (eventPoint.getX() - mouseEventPressed.getStartPoint().getX()) / 100;     // calculamos la distancia para saber hacia donde hay que moverla
-				double diffY = (eventPoint.getY() - mouseEventPressed.getStartPoint().getY()) / 100;
-				selectedFigure.moveTo( diffX, diffY);                 // movemos la figura llamando a un metodo de la misma
-				redrawCanvas();                                      // redibujamos todas las figuras pues las mismas tienen un orden de dibujo
+				selectedFigure.moveTo( event.getX() / 100, event.getY() / 100);
+				// movemos la figura llamando a un metodo de la misma
+				redrawCanvas();
+				// redibujamos todas las figuras pues las mismas tienen un orden de dibujo
 			}
 		});
+
 		setLeft(buttonsBox);
 		setRight(canvas);
 	}

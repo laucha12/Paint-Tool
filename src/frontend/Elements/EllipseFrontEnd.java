@@ -9,10 +9,11 @@ public class EllipseFrontEnd extends Ellipse implements PrintOvals {
 
     private final GraphicsContext graphicsContext;
 
-    EllipseFrontEnd(GraphicsContext graphicsContext, Point middlePoint, double minAxis, double maxAxis) {
+    public EllipseFrontEnd(Point middlePoint, double minAxis, double maxAxis, GraphicsContext graphicsContext) {
         super(middlePoint, minAxis, maxAxis);
         this.graphicsContext = graphicsContext;
     }
+
     @Override
     public void display() {
         print(graphicsContext, getCenterPoint(), getWidth(), getHeight(), Color.web(getColor()), Color.web(getStrokeColor()));

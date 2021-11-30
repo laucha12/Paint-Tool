@@ -6,9 +6,13 @@ public class MouseEvent {
 
     private final Point startPoint;
     private Point endPoint;
+    private final static int REDRAW_FACTOR = 100;
+    private final double xDragged;
+    private double yDragged;
 
     public MouseEvent(Point beginPoint){
         this.startPoint = beginPoint;
+        this.xDragged = beginPoint.getX() ;
     }
 
     public Point getStartPoint() {
@@ -19,10 +23,16 @@ public class MouseEvent {
         return endPoint;
     }
 
-    public void setEndPoint(Point endPoint) throws Exception{
+    public void setEndPoint(Point endPoint) {
         this.endPoint = endPoint;
-        if(startPoint == null || endPoint.getX() <= startPoint.getX() || endPoint.getY() <= startPoint.getY())  // Le agregamos que no deben ser iguales (antes era < no <=), TODO asegurarnos de esto
-            throw new Exception("Invalid end point relative to start point");
+        this.yDragged = endPoint.getY();
     }
 
+    public double getXDragged(){
+        return xDragged;
+    }
+
+    public double getYDragged() {
+        return yDragged;
+    }
 }

@@ -2,10 +2,7 @@ package frontend;
 
 import backend.model.Figure;
 import backend.model.Point;
-import frontend.Elements.CircleFrontEnd;
-import frontend.Elements.LineFrontEnd;
-import frontend.Elements.RectangleFrontEnd;
-import frontend.Elements.SquareFrontEnd;
+import frontend.Elements.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ToggleButton;
 
@@ -17,7 +14,9 @@ public enum Buttons {
     },
     SQUARE("Cuadrado") {
         public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
-            return new SquareFrontEnd(startPoint, endPoint, gc);
+            Point bottomRight = new Point(endPoint.getX(), startPoint.getY() + Math.abs(endPoint.getX() - startPoint.getX()));
+            //SOLO SE DIBUJA HACIA DERECHA Y ABAJO??
+            return new SquareFrontEnd(startPoint, bottomRight, gc);
         }
     },
     CIRCLE("Circulo") {
@@ -30,8 +29,9 @@ public enum Buttons {
     ELLIPSE("Ellipse") {
         @Override
         public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc) {
-            double radius = Math.abs(endPoint.getX() - startPoint.getX());
-            return new CircleFrontEnd(startPoint, radius, gc);
+            double axis1 = Math.abs(endPoint.getX() - startPoint.getX());
+            double axis2 = Math.abs(endPoint.getY() - startPoint.getY());
+            return new EllipseFrontEnd(startPoint, axis1, axis2, gc);
         }
     },
     LINE("Linea") {

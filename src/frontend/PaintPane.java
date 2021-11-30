@@ -48,7 +48,8 @@ public class PaintPane extends BorderPane {
 		for(Buttons button : Buttons.values())
 			button.getButton().setOnMouseClicked((e) -> actual = button);
 
-		ToggleButton[] toolsArr = {selectionButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton()};
+		ToggleButton[] toolsArr = {selectionButton, Buttons.CIRCLE.getButton(), Buttons.RECTANGLE.getButton(), Buttons.LINE.getButton(),
+									Buttons.ELLIPSE.getButton(), Buttons.SQUARE.getButton()};
 		ToggleGroup tools = new ToggleGroup();
 
 		for (ToggleButton tool : toolsArr) {

@@ -19,7 +19,7 @@ public class LineFrontEnd extends Line {
 
     @Override
     public void display() {
-        graphicsContext.fillPolygon(getX(), getY(), 8);
+        graphicsContext.fillPolygon(getX(), getY(), 4);
     }
 
     private double[] getX(){

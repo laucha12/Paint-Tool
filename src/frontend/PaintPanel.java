@@ -128,10 +128,14 @@ public class PaintPanel extends BorderPane {
 
 		canvas.setOnMouseDragged(event -> {
 			if(selectionButton.isSelected()) {
-				selectedFigure.moveTo( event.getX() / 100, event.getY() / 100);
+				double diffX = (event.getX() - mouseEventPressed.getX()) / 100;
+				double diffY = (event.getY() - mouseEventPressed.getY()) / 100;
+
 				// movemos la figura llamando a un metodo de la misma
-				redrawCanvas();
+				selectedFigure.moveTo(  diffX, diffY);
+
 				// redibujamos todas las figuras pues las mismas tienen un orden de dibujo
+				redrawCanvas();
 			}
 		});
 
@@ -142,9 +146,8 @@ public class PaintPanel extends BorderPane {
 	//Ippo: Quedo hermoso
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		for(Figure figure : canvasState.figures()) {								//al canvasState le pido las figuras e itero sobre ellas
+		for(Figure figure : canvasState.figures())								//al canvasState le pido las figuras e itero sobre ellas
 			figure.display();         												// dibujamos la figura en la pantalla
-		}
 	}
 
 	//TODO: Vale la pena este metodo? Se puede invocar directamente tiendo la figura y el boton

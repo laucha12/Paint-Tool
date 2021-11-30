@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public abstract class Figure implements Movable, Drawable, Colorable{
 
-     private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 20.0;
+     private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 20.0, MIN_STROKE = 0;
      private String color="#FFFF00", strokeColor="#000000";
      private boolean isSelected = false;
      private double strokeWidth = DEFAULT_STROKE;
@@ -41,6 +41,10 @@ public abstract class Figure implements Movable, Drawable, Colorable{
 
      public static double getDefaultStrokeWidth(){
           return DEFAULT_STROKE;
+     }
+
+     public static double getMinStroke() {
+          return MIN_STROKE;
      }
 
      public static double getMaxStroke(){

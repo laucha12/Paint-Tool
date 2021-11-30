@@ -14,7 +14,7 @@ public class RectangleFrontEnd extends Rectangle implements PrintPolygons {
 
     @Override
     public void display() {
-        print(gc,this.getTopLeft(),this.getWidth(),this.getHeight(), Color.web(getColor()),Color.web(getStrokeColor()));
+        print(gc,this.getTopLeft(),this.getWidth(),this.getHeight(), Color.web(getColor()),Color.web(getStrokeColor()), getStrokeWidth());
 
     }
 }

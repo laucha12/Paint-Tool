@@ -16,7 +16,7 @@ public class EllipseFrontEnd extends Ellipse implements PrintOvals {
 
     @Override
     public void display() {
-        print(graphicsContext, getCenterPoint(), getWidth(), getHeight(), Color.web(getColor()), Color.web(getStrokeColor()));
+        print(graphicsContext, getCenterPoint(), getWidth(), getHeight(), Color.web(getColor()), Color.web(getStrokeColor()), getStrokeWidth());
 
     }
 

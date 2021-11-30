@@ -35,7 +35,7 @@ public class PaintPanel extends BorderPane {
 	//Creamos los selectores de color y de ancho, con los valores por defecto
 	ColorPicker figureColor = new ColorPicker(Color.web(Colorable.defaultColor()));
 	ColorPicker figureStrokeColor = new ColorPicker(Color.web(Colorable.defaultStrokeColor()));
-	Slider figureStrokeWidth = new Slider(0, Figure.getMaxStroke(),Figure.getDefaultStrokeWidth());
+	Slider figureStrokeWidth = new Slider(Figure.getMinStroke(), Figure.getMaxStroke(),Figure.getDefaultStrokeWidth());
 
 	// Seleccionar una figura
 	Figure selectedFigure;

@@ -22,6 +22,7 @@ public class LineFrontEnd extends Line {
     @Override
     public void display() {
         graphicsContext.setStroke(Color.web(this.getStrokeColor()));
+        graphicsContext.setLineWidth(getStrokeWidth());
         graphicsContext.strokeLine(getStart().getX(), getStart().getY(),getEnd().getX(),getEnd().getY());
     }
 

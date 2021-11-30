@@ -17,6 +17,6 @@ public class CircleFrontEnd extends Circle implements PrintOvals {
 
     @Override
     public void display() {
-        print(graphicsContext, getCenterPoint(), getRadius(), getRadius(), Color.web(getColor()), Color.web(getStrokeColor()));
+        print(graphicsContext, getCenterPoint(), getRadius(), getRadius(), Color.web(getColor()), Color.web(getStrokeColor()), getStrokeWidth());
     }
 }

@@ -38,9 +38,6 @@ public class PaintPanel extends BorderPane {
 	ColorPicker figureStrokeColor = new ColorPicker(Color.web(Colorable.defaultStrokeColor()));
 	Slider figureStrokeWidth = new Slider(Figure.getMinStroke(), Figure.getMaxStroke(),Figure.getDefaultStrokeWidth());
 
-	// Seleccionar una figura
-	Figure selectedFigure;
-
 	// StatusBar
 	StatusPanel statusPane;
 
@@ -96,6 +93,10 @@ public class PaintPanel extends BorderPane {
 
 		setupButtons();
 
+		deleteButton.setOnMouseClicked((e)->{
+			canvasState.delete(figureSelected);
+			unSelect();
+		});
 
 		clearButton.setOnMouseClicked((e) -> {
 			gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());	//Se borra lo presente en la pantalla
@@ -110,13 +111,14 @@ public class PaintPanel extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 
-			if(selectionButton.isSelected())
-				return;
+			/*if(selectionButton.isSelected())
+				return;*/
 
 			mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
 
-			canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
-
+			if (actual != null)
+				canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
+			actual=null;
 			redrawCanvas();
 		});
 
@@ -126,10 +128,12 @@ public class PaintPanel extends BorderPane {
 		});
 
 		sendToBackButton.setOnMouseClicked( (event) -> {
-			for (Figure figure : canvasState.figures())
-				if(figure.isSelected()) {
-					canvasState.sendFigureToBack(figure);
-				}
+			canvasState.sendMultipleFiguresToBack(figureSelected);
+			unSelect();
+		});
+		sendToFrontButton.setOnMouseClicked((event) -> {
+			canvasState.sendMultipleFiguresToFront(figureSelected);
+			unSelect();
 		});
 
 
@@ -170,6 +174,7 @@ public class PaintPanel extends BorderPane {
 				// movemos la figura llamando a un metodo de la misma
 				for (Figure aux:figureSelected)
 					aux.moveTo(diffX,diffY);
+
 				// redibujamos todas las figuras pues las mismas tienen un orden de dibujo
 				redrawCanvas();
 			}

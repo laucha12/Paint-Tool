@@ -47,19 +47,12 @@ public class CanvasState {
         figures.forEach(this::sendFigureToFront);
     }
 
+    public void delete(Collection<Figure> figures){
+        list.removeAll(figures);
+    }
 
     public void clear() {
         list.clear();
     }
 
 }
-
-//PUNTO 3, BORRAR DEL CANVAS Y VOLVER A REDRAWEAR()
-
-
-
-/*
-* Modificaciones para el punto 4:
-*   Se cambia el ArrayList por un LinkedList. De esta forma podemos hacer que un elemento vaya al comienzo o al final de la lista.
-*
-* */

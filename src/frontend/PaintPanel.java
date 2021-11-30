@@ -106,12 +106,10 @@ public class PaintPanel extends BorderPane {
 		});
 
 		sendToBackButton.setOnMouseClicked( (event) -> {
-			if(sendToBackButton.isSelected()){
-				for (Figure figure : canvasState.figures())
-					if(figure.isSelected()) {
-						canvasState.sendFigureToBack(figure);
-					}
-			}
+			for (Figure figure : canvasState.figures())
+				if(figure.isSelected()) {
+					canvasState.sendFigureToBack(figure);
+				}
 		});
 
 
@@ -124,7 +122,7 @@ public class PaintPanel extends BorderPane {
 
 				//OBS: RECORRER DE ATRAS PARA ADELANTE MAS EFICIENTE
 				for (Figure figure : canvasState.figures()) {   			//Itera para buscar dentro de las figuras de la canvas
-					if(figureBelongs(figure, eventPoint)) {					//Si encontro la figuar
+					if(figure.belongs(eventPoint)) {					//Si encontro la figuar
 						found = true;
 						selectedFigure = figure;
 						figure.select();
@@ -166,11 +164,6 @@ public class PaintPanel extends BorderPane {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures())								//al canvasState le pido las figuras e itero sobre ellas
 			figure.display();         												// dibujamos la figura en la pantalla
-	}
-
-	//TODO: Vale la pena este metodo? Se puede invocar directamente tiendo la figura y el boton
-	boolean figureBelongs(Figure figure, Point eventPoint) {
-		return figure.belongs(eventPoint);                    //la figura nos dice si contiene a un punto
 	}
 
 }

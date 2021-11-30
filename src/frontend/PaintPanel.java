@@ -81,7 +81,6 @@ public class PaintPanel extends BorderPane {
 				return;
 			}
 
-			//
 			canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
 
 			redrawCanvas();
@@ -93,6 +92,7 @@ public class PaintPanel extends BorderPane {
 		});
 
 
+		//TODO fijarse si hay que cambiarlo
 		canvas.setOnMouseClicked(event -> {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
@@ -115,17 +115,14 @@ public class PaintPanel extends BorderPane {
 			}
 		});
 
-		canvas.setOnMouseDragged(event -> {
-			//lo que hace es determinar el evento que se va a probocar en el momento
-			// en el que el mouse se se mueva con una figura adentro
 
-			//TODO Esta mal como lo hace debemos ponerlo directamente en la clase figure
+		canvas.setOnMouseDragged(event -> {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
-				double diffX = (eventPoint.getX() - mouseEventPressed.getStartPoint().getX()) / 100;
+				double diffX = (eventPoint.getX() - mouseEventPressed.getStartPoint().getX()) / 100;     // calculamos la distancia para saber hacia donde hay que moverla
 				double diffY = (eventPoint.getY() - mouseEventPressed.getStartPoint().getY()) / 100;
-				selectedFigure.moveTo(diffX,diffY);
-				redrawCanvas();
+				selectedFigure.moveTo( diffX, diffY);                 // movemos la figura llamando a un metodo de la misma
+				redrawCanvas();                                      // redibujamos todas las figuras pues las mismas tienen un orden de dibujo
 			}
 		});
 		setLeft(buttonsBox);
@@ -133,23 +130,23 @@ public class PaintPanel extends BorderPane {
 	}
 
 
-	//TODO ya averiguamos como se puede borrar una figura, entonces podemos mejorar la eficiencia evitantdo tener que redibujar entero
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures()) {								//al canvasState le pido las figuras e itero sobre ellas
 			if(figure == selectedFigure) {											//Si la figura es la seleccionada, el stroke se lo hago rojo
 				gc.setStroke(Color.RED);
-			} else {
+			}
+			else {
 				gc.setStroke(lineColor);											//Si no el lineColor (que por ahora es negro xq es el por defecto)
 			}
 			gc.setFill(fillColor);
-			figure.display();
+			figure.display();         												// dibujamos la figura en la pantalla
 		}
 	}
 
 
 	boolean figureBelongs(Figure figure, Point eventPoint) {
-		return figure.belongs(eventPoint);
+		return figure.belongs(eventPoint);                    //la figura nos dice si contiene a un punto
 	}
 
 }

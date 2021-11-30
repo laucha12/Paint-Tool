@@ -29,6 +29,7 @@ public class PaintPanel extends BorderPane {
 	ToggleButton clearButton = new ToggleButton("Limpiar");
 	ToggleButton sendToBackButton = new ToggleButton("Al fondo");
 	ToggleButton sendToFrontButton = new ToggleButton("Al frente");
+	ToggleButton deleteButton = new ToggleButton("Borrar");
 
 	FigureButtons actual;
 
@@ -54,11 +55,15 @@ public class PaintPanel extends BorderPane {
 
 		// Itero por todos los botons
 		for(FigureButtons button : FigureButtons.values())
-			button.getButton().setOnMouseClicked((e) -> actual = button);
+			button.getButton().setOnMouseClicked((e) -> {
+				unSelect();
+
+				actual = button;
+			});
 
 
 		ToggleButton[] toolsArr = {selectionButton, clearButton, sendToBackButton, sendToFrontButton, FigureButtons.CIRCLE.getButton(), FigureButtons.RECTANGLE.getButton(), FigureButtons.LINE.getButton(),
-				FigureButtons.ELLIPSE.getButton(), FigureButtons.SQUARE.getButton()};
+				FigureButtons.ELLIPSE.getButton(), FigureButtons.SQUARE.getButton(), deleteButton};
 
 
 
@@ -95,10 +100,6 @@ public class PaintPanel extends BorderPane {
 		clearButton.setOnMouseClicked((e) -> {
 			gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 			canvasState.clear();
-
-		});
-
-		sendToBackButton.setOnMouseClicked((e) -> {
 
 		});
 
@@ -141,13 +142,14 @@ public class PaintPanel extends BorderPane {
 
 				//OBS: RECORRER DE ATRAS PARA ADELANTE MAS EFICIENTE
 				for (Figure figure : canvasState.figures()) {   			//Itera para buscar dentro de las figuras de la canvas
-					if(figure.belongs(eventPoint)) {					//Si encontro la figuar
+					if(figure.belongs(eventPoint) || figure.inside(mouseEventPressed.getStartPoint(), eventPoint)) {					//Si encontro la figuar
 						found = true;
 						figure.select();
 						label.append(figure.toString());
 						figureSelected.add(figure);
 					}
 				}
+
 				if (found) {
 					statusPane.updateStatus(label.toString());				//Actualiza el estado si encontro la figura
 				} else {
@@ -179,11 +181,15 @@ public class PaintPanel extends BorderPane {
      void unSelect(){
 		//le cambio el borde a negro de las figuras que estaban seleccionadas
 		 for (Figure aux:figureSelected)
-			 aux.setStrokeColor("#000000");
-			//limpio las figuras seleccion
+			 aux.setStrokeColor(Colorable.defaultStrokeColor());
+
+		 //limpio las figuras seleccion
 		 figureSelected.clear();
+
+		 //dibjuamos de vuelta el canvas
+		 redrawCanvas();
 	 }
-	//Ippo: Quedo hermoso
+
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures())								//al canvasState le pido las figuras e itero sobre ellas

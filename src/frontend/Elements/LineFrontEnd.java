@@ -26,4 +26,6 @@ public class LineFrontEnd extends Line {
         graphicsContext.strokeLine(getStart().getX(), getStart().getY(),getEnd().getX(),getEnd().getY());
     }
 
+
+
 }

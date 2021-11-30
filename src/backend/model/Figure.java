@@ -2,7 +2,7 @@ package backend.model;
 
 import java.util.Collection;
 
-public abstract class Figure implements Movable, Drawable, Colorable{
+public abstract class Figure implements Movable, Drawable, Colorable, Selectable{
 
      private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 20.0, MIN_STROKE = 0;
      private String color="#FFFF00", strokeColor="#000000";
@@ -70,5 +70,7 @@ public abstract class Figure implements Movable, Drawable, Colorable{
      public void setStrokeColor(String other) {
           strokeColor = other;
      }
+
+
 
 }

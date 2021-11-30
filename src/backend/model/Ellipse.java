@@ -60,5 +60,23 @@ public abstract class Ellipse extends Figure {
 
     }
 
+    public boolean inside(Point point1, Point point2) {
+        if (centerPoint.getX() + getWidth()  > point2.getX()) {
+            //it is outside of the rectangle on the right side
+            return false;
+        } else if (centerPoint.getX() - getWidth()  < point1.getX()) {
+            //it is outside on the left side
+            return false;
+        }
+        if (centerPoint.getY() + getHeight()  > point2.getY()) {
+            //it is outside of the rectangle on the bottom side
+            return false;
+
+        } else if (centerPoint.getY() -  getHeight() < point1.getY()) {
+            //it is outside on the top side
+            return false;
+        }
+        return true;
+    }
 
 }

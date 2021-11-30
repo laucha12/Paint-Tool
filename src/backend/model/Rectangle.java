@@ -60,4 +60,10 @@ public abstract class Rectangle extends Figure {
         return  point.getX() > this.getTopLeft().getX() && point.getX() < this.getBottomRight().getX() &&
                 point.getY() > this.getTopLeft().getY() && point.getY() < this.getBottomRight().getY();
     }
+
+
+    public boolean inside(Point point1, Point point2){
+        return point2.getX() > getBottomRight().getX() && point2.getY() > getBottomRight().getY() &&
+          point1.getX() < getTopLeft().getX() && point1.getY() < getTopLeft().getY();
+    }
 }

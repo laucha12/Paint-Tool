@@ -58,6 +58,10 @@ public abstract class Line extends Figure{
     }
 
 
+    public boolean inside(Point point1, Point point2){
+        return true;//point2.getX() > getBottomRight().getX() && point2.getY() > getBottomRight().getY() &&
+                //point1.getX() < getTopLeft().getX() && point1.getY() < getTopLeft().getY();
+    }
 
 
 }

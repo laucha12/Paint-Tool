@@ -42,12 +42,14 @@ public class CanvasState {
     }
 
     public void selectFigure(Figure figure){
+        //Marco que en la figura que esta seleccionada
         figure.select();
+        //La agrego a mi lista de seleccionadas
         selected.add(figure);
     }
 
     public Collection<Figure> getSelected(){
-        return selected;
+        return new ArrayList<>(selected);
     }
 
     public void unselectAll(){

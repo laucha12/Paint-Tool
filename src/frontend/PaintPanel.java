@@ -27,7 +27,6 @@ public class PaintPanel extends BorderPane {
 
     // Botones Barra Izquierda
     ToggleButton selectionButton = new ToggleButton("Seleccionar");
-    ToggleButton clearButton = new ToggleButton("Limpiar");
     ToggleButton sendToBackButton = new ToggleButton("Al fondo");
     ToggleButton sendToFrontButton = new ToggleButton("Al frente");
     ToggleButton deleteButton = new ToggleButton("Borrar");
@@ -53,7 +52,7 @@ public class PaintPanel extends BorderPane {
     private void setupButtons() {
 
 
-        ToggleButton[] toolsArr = {selectionButton, clearButton, sendToBackButton, sendToFrontButton, FigureButtons.CIRCLE.getButton(), FigureButtons.RECTANGLE.getButton(), FigureButtons.LINE.getButton(),
+        ToggleButton[] toolsArr = {selectionButton, sendToBackButton, sendToFrontButton, FigureButtons.CIRCLE.getButton(), FigureButtons.RECTANGLE.getButton(), FigureButtons.LINE.getButton(),
                 FigureButtons.ELLIPSE.getButton(), FigureButtons.SQUARE.getButton(), deleteButton};
 
 
@@ -104,13 +103,6 @@ public class PaintPanel extends BorderPane {
     }
 
 
-    public void clearButtonListener() {
-        clearButton.setOnMouseClicked((e) -> {
-                                                        //En el estado del back se borran las figuras
-        });
-    }
-
-
     public void colorButtonsListener() {
         figureColor.setOnMouseClicked(e -> canvasState.getSelected().forEach(figure -> figure.setColor("#" + Double.toHexString(figureColor.getValue().getRed()) + Double.toHexString(figureColor.getValue().getGreen()) + Double.toHexString(figureColor.getValue().getBlue()))));
         figureStrokeColor.setOnMouseClicked(e -> canvasState.getSelected().forEach(figure -> figure.setStrokeColor("#" + Double.toHexString(figureStrokeColor.getValue().getRed()) + Double.toHexString(figureStrokeColor.getValue().getGreen()) + Double.toHexString(figureStrokeColor.getValue().getBlue()))));
@@ -139,15 +131,12 @@ public class PaintPanel extends BorderPane {
         setupButtons();
 
         deleteButtonListener();
-        clearButtonListener();
         colorButtonsListener();
 
         figureButtonsListener();
 
 
-        canvas.setOnMousePressed(event -> {
-            mouseEventPressed = new MouseEvent(new Point(event.getX(), event.getY()));
-        });
+        canvas.setOnMousePressed(event -> mouseEventPressed = new MouseEvent(new Point(event.getX(), event.getY())));
 
 		canvas.setOnMouseReleased(event -> {
 			mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
@@ -157,16 +146,6 @@ public class PaintPanel extends BorderPane {
 			actual=null;
 			redrawCanvas();
 		});
-
-        canvas.setOnMouseReleased(event -> {
-
-            mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
-
-            if (actual != null)
-                canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
-            actual = null;
-            redrawCanvas();
-        });
 
         canvas.setOnMouseMoved(event -> {
             // toma el punto en el que esta en el movimiento

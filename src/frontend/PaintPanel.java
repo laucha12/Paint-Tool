@@ -83,8 +83,8 @@ public class PaintPanel extends BorderPane {
 
     public void deleteButtonListener() {
         deleteButton.setOnMouseClicked((e) -> {
-
-
+            canvasState.delete(figureSelected);
+            unSelect();
         });
 
         sendToBackButton.setOnMouseClicked((event) -> {

@@ -3,6 +3,7 @@ package frontend.controllers;
 import backend.model.CanvasState;
 import backend.model.components.Figure;
 import frontend.PaintPanel.*;
+import frontend.engines.CanvasEngine;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ToggleButton;
 
@@ -12,6 +13,7 @@ public enum FunctionButtons {
         @Override
         public void apply(CanvasState canvasState, Canvas canvas) {
             canvasState.delete(canvasState.getSelected());
+            CanvasEngine.redrawCanvas(canvasState, canvas);
         }
     },
     TOBACK("Al fondo") {
@@ -19,6 +21,7 @@ public enum FunctionButtons {
         public void apply(CanvasState canvasState, Canvas canvas) {
             canvasState.sendMultipleFiguresToBack(canvasState.getSelected());
             canvasState.unselectAll();
+            CanvasEngine.redrawCanvas(canvasState, canvas);
         }
     },
     TOFRONT("Al frente") {
@@ -26,6 +29,7 @@ public enum FunctionButtons {
         public void apply(CanvasState canvasState, Canvas canvas) {
             canvasState.sendMultipleFiguresToFront(canvasState.getSelected());
             canvasState.unselectAll();
+            CanvasEngine.redrawCanvas(canvasState, canvas);
         }
     },
     CLEAR("Limpiar") {
@@ -33,6 +37,7 @@ public enum FunctionButtons {
         public void apply(CanvasState canvasState, Canvas canvas) {
             canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());      //Se borra lo presente en la pantalla
             canvasState.resetCanvas();
+            CanvasEngine.redrawCanvas(canvasState, canvas);
         }
     };
 

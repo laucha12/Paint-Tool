@@ -52,8 +52,7 @@ public class PaintPanel extends BorderPane {
     private void setupButtons() {
 
 
-        ToggleButton[] toolsArr = {selectionButton, sendToBackButton, sendToFrontButton, FigureButtons.CIRCLE.getButton(), FigureButtons.RECTANGLE.getButton(), FigureButtons.LINE.getButton(),
-                FigureButtons.ELLIPSE.getButton(), FigureButtons.SQUARE.getButton(), deleteButton};
+        ToggleButton[] toolsArr = {selectionButton, FigureButtons.RECTANGLE.getButton(), FigureButtons.CIRCLE.getButton(), FigureButtons.SQUARE.getButton(), FigureButtons.ELLIPSE.getButton(), FigureButtons.LINE.getButton(), deleteButton, sendToBackButton, sendToFrontButton};
 
 
         //FUNCIONALIDAD DE JAVA FX

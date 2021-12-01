@@ -7,20 +7,14 @@ import backend.model.interfaces.Colorable;
 import frontend.controllers.FigureButtons;
 import frontend.controllers.MouseEvent;
 import frontend.engines.HexStringEngine;
-import frontend.engines.SelectedEngine;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
-import java.util.ArrayList;
 
 public class PaintPanel extends BorderPane {
 
@@ -44,6 +38,10 @@ public class PaintPanel extends BorderPane {
     ColorPicker figureColor = new ColorPicker(Color.web(Colorable.defaultColor()));
     ColorPicker figureStrokeColor = new ColorPicker(Color.web(Colorable.defaultStrokeColor()));
     Slider figureStrokeWidth = new Slider(Figure.getMinStroke(), Figure.getMaxStroke(), Figure.getDefaultStrokeWidth());
+
+
+    Label strokeLabel = new Label("Borde");
+    Label fillLabel = new Label("Relleno");
 
     // StatusBar
     StatusPanel statusPane;
@@ -71,9 +69,13 @@ public class PaintPanel extends BorderPane {
 
         buttonsBox.getChildren().addAll(toolsArr);
         //Agrego seleccionadores de colores
-        buttonsBox.getChildren().add(figureColor);
-        buttonsBox.getChildren().add(figureStrokeColor);
+        buttonsBox.getChildren().add(strokeLabel);
+        figureStrokeWidth.setShowTickMarks(true);
+        figureStrokeWidth.setShowTickLabels(true);
         buttonsBox.getChildren().add(figureStrokeWidth);
+        buttonsBox.getChildren().add(figureStrokeColor);
+        buttonsBox.getChildren().add(fillLabel);
+        buttonsBox.getChildren().add(figureColor);
         buttonsBox.setPadding(new Insets(5));
         buttonsBox.setStyle("-fx-background-color: #999");
         buttonsBox.setPrefWidth(100);

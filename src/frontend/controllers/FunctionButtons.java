@@ -1,11 +1,6 @@
 package frontend.controllers;
 
 import backend.model.CanvasState;
-import backend.model.components.Figure;
-import frontend.PaintPanel.*;
-import frontend.engines.SelectedEngine;
-
-import java.util.ArrayList;
 
 public enum FunctionButtons {
     DELETE("Borrar"){

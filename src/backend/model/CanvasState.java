@@ -48,3 +48,28 @@ public class CanvasState {
     }
 
 }
+
+/*
+*   List<Figures> selected = new ArrayList<>();
+*   Metodos para agregar
+*
+*   public void addFigure(Figure other){
+        other.select();
+        selected.add(other);
+    }
+    public Collection<Figure> getSelected(){
+        return selected;
+    }
+
+    public void unselectAll(){
+        for (Figure aux : selected)
+            aux.unselect();
+        //limpio las figuras seleccion
+        selected.clear();
+    }
+
+    public boolean isEmpty(){
+        return selected.isEmpty();
+    }
+*
+* */

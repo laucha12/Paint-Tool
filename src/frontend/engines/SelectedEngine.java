@@ -15,12 +15,14 @@ public class SelectedEngine {
     public Collection<Figure> getSelected(){
         return elements;
     }
+
     public void unselectAll(){
         for (Figure aux : elements)
             aux.resetStrokeColor();
         //limpio las figuras seleccion
         elements.clear();
     }
+
     public boolean isEmpty(){
         return elements.isEmpty();
     }

@@ -1,4 +1,4 @@
-package frontend.Elements;
+package frontend.components;
 
 public interface FrontEndFigure {
     default void isSelected(){

@@ -1,6 +1,9 @@
 package frontend;
 
 import backend.model.*;
+import backend.model.components.Figure;
+import backend.model.components.Point;
+import backend.model.interfaces.Colorable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -187,10 +190,11 @@ public class PaintPanel extends BorderPane {
 		setLeft(buttonsBox);
 		setRight(canvas);
 	}
+
      void unSelect(){
 		//le cambio el borde a negro de las figuras que estaban seleccionadas
-		 for (Figure aux:figureSelected)
-			 aux.setStrokeColor(Colorable.defaultStrokeColor());
+		 for (Figure aux : figureSelected)
+			 aux.resetStrokeColor();
 
 		 //limpio las figuras seleccion
 		 figureSelected.clear();

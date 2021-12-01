@@ -1,6 +1,6 @@
-package frontend.Elements;
+package frontend.components;
 
-import backend.model.Point;
+import backend.model.components.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

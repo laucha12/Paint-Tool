@@ -1,7 +1,7 @@
-package frontend.Elements;
+package frontend.components;
 
-import backend.model.Point;
-import backend.model.Square;
+import backend.model.components.Point;
+import backend.model.components.Square;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

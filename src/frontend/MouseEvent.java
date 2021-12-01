@@ -1,6 +1,6 @@
 package frontend;
 
-import backend.model.Point;
+import backend.model.components.Point;
 
 public class MouseEvent {
 

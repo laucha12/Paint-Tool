@@ -1,4 +1,4 @@
-package backend.model;
+package backend.model.interfaces;
 
 public interface Colorable {
 
@@ -10,6 +10,8 @@ public interface Colorable {
 
     void setStrokeColor(String other);
 
+    static String selectedStrokeColor() { return "#A52A2A";}
+
     static String defaultColor() {
         return "#FFFF00";
     }
@@ -17,5 +19,7 @@ public interface Colorable {
     static String defaultStrokeColor() {
         return "#000000";
     }
+
+    default void resetStrokeColor() { setStrokeColor(Colorable.defaultStrokeColor()); }
 
 }

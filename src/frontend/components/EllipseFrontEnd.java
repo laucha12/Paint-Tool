@@ -1,7 +1,7 @@
-package frontend.Elements;
+package frontend.components;
 
-import backend.model.Ellipse;
-import backend.model.Point;
+import backend.model.components.Ellipse;
+import backend.model.components.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -16,9 +16,8 @@ public class EllipseFrontEnd extends Ellipse implements PrintOvals {
 
     @Override
     public void display() {
-        print(graphicsContext, getCenterPoint(), getWidth(), getHeight(), Color.web(getColor()), Color.web(getStrokeColor()), getStrokeWidth());
+        printOval(graphicsContext, getCenterPoint(), getWidth(), getHeight(), Color.web(getColor()), Color.web(getStrokeColor()), getStrokeWidth());
 
     }
-
 
 }

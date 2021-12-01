@@ -21,4 +21,8 @@ public class SelectedEngine {
         //limpio las figuras seleccion
         elements.clear();
     }
+    public boolean isEmpty(){
+        return elements.isEmpty();
+    }
+
 }

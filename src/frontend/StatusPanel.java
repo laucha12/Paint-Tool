@@ -33,6 +33,13 @@ public class StatusPanel extends BorderPane {
 		statusLabel.setText(text);
 	}
 
+	//Agrego texto al texto que estaba anteriormente
+	public void appendText(String text){
+		//Puedo hacer la suma y no utilizar un StringBuilder ya que las llamadas al mismo no son muchas
+		statusLabel.setText(statusLabel.getText()+text);
+	}
+
+
 	//Este metodo es llamado cada vez que se mueve el mouse, actualisa el valor del panel de status
 	//en base a donde se ubicaba el mouse al moverse (sobre una figura o no)
 	public void mouseMoved(Point eventPoint){

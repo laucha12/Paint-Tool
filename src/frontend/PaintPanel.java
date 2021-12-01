@@ -96,11 +96,13 @@ public class PaintPanel extends BorderPane {
 
 		setupButtons();
 
+		//Indico que va a hacer el boton delete cuando se presione
 		deleteButton.setOnMouseClicked((e)->{
 			canvasState.delete(figureSelected);
 			unSelect();
 		});
 
+		//Indico que va a hcer el boton clear button cuando se presione
 		clearButton.setOnMouseClicked((e) -> {
 			gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());	//Se borra lo presente en la pantalla
 			canvasState.clear();												//En el estado del back se borran las figuras
@@ -113,27 +115,27 @@ public class PaintPanel extends BorderPane {
 		});
 
 		canvas.setOnMouseReleased(event -> {
-
-			/*if(selectionButton.isSelected())
-				return;*/
-
 			mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
-
+			// si hay algun boton seleccionado de los toggles se llama al enum que nos genera las figuras
 			if (actual != null)
 				canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), gc));
 			actual=null;
 			redrawCanvas();
 		});
 
+
 		canvas.setOnMouseMoved(event -> {
 			// toma el punto en el que esta en el movimiento
 			statusPane.mouseMoved(new Point(event.getX(), event.getY()));
 		});
 
+		//Indico que hara el boton sendToBack cuando lo presionen
 		sendToBackButton.setOnMouseClicked( (event) -> {
 			canvasState.sendMultipleFiguresToBack(figureSelected);
 			unSelect();
 		});
+
+		//Indico que hace el boton sendToFront cuando lo presionen
 		sendToFrontButton.setOnMouseClicked((event) -> {
 			canvasState.sendMultipleFiguresToFront(figureSelected);
 			unSelect();
@@ -144,23 +146,20 @@ public class PaintPanel extends BorderPane {
 		canvas.setOnMouseClicked(event -> {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
-				boolean found = false;
-				StringBuilder label = new StringBuilder("Se seleccionó: ");
 
-				//OBS: RECORRER DE ATRAS PARA ADELANTE MAS EFICIENTE
-				for (Figure figure : canvasState.figures()) {   			//Itera para buscar dentro de las figuras de la canvas
+				statusPane.updateStatus ("Se seleccionó: ");
+				//Bucos dentro de las figuras cuales tienen los puntos de seleccion dentro
+				for (Figure figure : canvasState.figures()) {
+					//llamo a las funciones para verificar el bellong tanto de un punto como de una figura
 					if(figure.belongs(eventPoint) || figure.inside(mouseEventPressed.getStartPoint(), eventPoint)) {					//Si encontro la figuar
-						found = true;
 						figure.select();
-						label.append(figure.toString());
+						//Funcion creada en el statusPane para que concatene el texto que tiene en el label
+						statusPane.appendText(figure.toString());
 						figureSelected.add(figure);
 					}
 				}
 
-				if (found) {
-					statusPane.updateStatus(label.toString());				//Actualiza el estado si encontro la figura
-				} else {
-					//cuando se hace un click fuera de una figura se deselecciona las figuras
+				if (figureSelected.size() == 0 ) {
 					unSelect();
 					statusPane.updateStatus("Ninguna figura encontrada");  //Actualiza el estado si no encontro la figura
 				}

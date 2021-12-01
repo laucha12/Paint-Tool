@@ -5,12 +5,14 @@ import backend.model.components.Figure;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 public class CanvasState {
 
     //Guarda una lista con las figuras que estan presentes en el canvas
     private final LinkedList<Figure> list = new LinkedList<>();
-    //TIENE QUE SER UNA LINKED LIST PARA INSERTAR ADELANTE DE TODO, PUNTO 4
+    //Guarda una lista con las figuras selccionadas
+    private final List<Figure> selected = new ArrayList<>();
 
     public void addFigure(Figure figure) {
         list.add(figure);
@@ -39,6 +41,26 @@ public class CanvasState {
         figures.forEach(this::sendFigureToFront);
     }
 
+    public void selectFigure(Figure figure){
+        figure.select();
+        selected.add(figure);
+    }
+
+    public Collection<Figure> getSelected(){
+        return selected;
+    }
+
+    public void unselectAll(){
+        //A cada figura la deselecciono
+        selected.forEach(Figure::unselect);
+        //limpio las figuras seleccion
+        selected.clear();
+    }
+
+    public boolean isEmpty(){
+        return selected.isEmpty();
+    }
+
     public void delete(Collection<Figure> figures){
         list.removeAll(figures);
     }
@@ -48,28 +70,3 @@ public class CanvasState {
     }
 
 }
-
-/*
-*   List<Figures> selected = new ArrayList<>();
-*   Metodos para agregar
-*
-*   public void addFigure(Figure other){
-        other.select();
-        selected.add(other);
-    }
-    public Collection<Figure> getSelected(){
-        return selected;
-    }
-
-    public void unselectAll(){
-        for (Figure aux : selected)
-            aux.unselect();
-        //limpio las figuras seleccion
-        selected.clear();
-    }
-
-    public boolean isEmpty(){
-        return selected.isEmpty();
-    }
-*
-* */

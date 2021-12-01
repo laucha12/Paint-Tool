@@ -10,28 +10,28 @@ import java.util.ArrayList;
 public enum FunctionButtons {
     DELETE("Borrar"){
         @Override
-        public void apply(SelectedEngine selectedEngine, CanvasState canvasState) {
-            canvasState.delete(selectedEngine.getSelected());
+        public void apply(CanvasState canvasState) {
+            canvasState.delete(canvasState.getSelected());
         }
     },
     TOBACK("Al fondo") {
         @Override
-        public void apply(SelectedEngine selectedEngine, CanvasState canvasState) {
-            canvasState.sendMultipleFiguresToBack(selectedEngine.getSelected());
-            selectedEngine.unselectAll();
+        public void apply(CanvasState canvasState) {
+            canvasState.sendMultipleFiguresToBack(canvasState.getSelected());
+            canvasState.unselectAll();
         }
     },
     TOFRONT("Al frente") {
         @Override
-        public void apply(SelectedEngine selectedEngine, CanvasState canvasState) {
-            canvasState.sendMultipleFiguresToFront(selectedEngine.getSelected());
-            selectedEngine.unselectAll();
+        public void apply(CanvasState canvasState) {
+            canvasState.sendMultipleFiguresToFront(canvasState.getSelected());
+            canvasState.unselectAll();
         }
     };;
 
     private final String name;
 
-    abstract public void apply(SelectedEngine selectedEngine, CanvasState canvasState);
+    abstract public void apply(CanvasState canvasState);
 
         FunctionButtons(String name){
             this.name = name;

@@ -48,8 +48,6 @@ public class PaintPanel extends BorderPane {
     // StatusBar
     StatusPanel statusPane;
 
-    SelectedEngine figureSelected = new SelectedEngine();
-
     MouseEvent mouseEventPressed; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
 
     VBox buttonsBox = new VBox(10);
@@ -85,20 +83,20 @@ public class PaintPanel extends BorderPane {
 
     public void deleteButtonListener() {
         deleteButton.setOnMouseClicked((e) -> {
-            canvasState.delete(figureSelected.getSelected());
-            figureSelected.unselectAll();
+            canvasState.delete(canvasState.getSelected());
+            canvasState.unselectAll();
             redrawCanvas();
         });
 
         sendToBackButton.setOnMouseClicked((event) -> {
-            canvasState.sendMultipleFiguresToBack(figureSelected.getSelected());
-            figureSelected.unselectAll();
+            canvasState.sendMultipleFiguresToBack(canvasState.getSelected());
+            canvasState.unselectAll();
             redrawCanvas();
         });
 
         sendToFrontButton.setOnMouseClicked((event) -> {
-            canvasState.sendMultipleFiguresToFront(figureSelected.getSelected());
-            figureSelected.unselectAll();
+            canvasState.sendMultipleFiguresToFront(canvasState.getSelected());
+            canvasState.unselectAll();
             redrawCanvas();
         });
     }
@@ -112,9 +110,9 @@ public class PaintPanel extends BorderPane {
 
 
     public void colorButtonsListener() {
-        figureColor.setOnMouseClicked(e -> figureSelected.getSelected().forEach(figure -> figure.setColor("#" + Double.toHexString(figureColor.getValue().getRed()) + Double.toHexString(figureColor.getValue().getGreen()) + Double.toHexString(figureColor.getValue().getBlue()))));
-        figureStrokeColor.setOnMouseClicked(e -> figureSelected.getSelected().forEach(figure -> figure.setStrokeColor("#" + Double.toHexString(figureStrokeColor.getValue().getRed()) + Double.toHexString(figureStrokeColor.getValue().getGreen()) + Double.toHexString(figureStrokeColor.getValue().getBlue()))));
-        figureStrokeWidth.setOnMouseClicked(e -> figureSelected.getSelected().forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue())));
+        figureColor.setOnMouseClicked(e -> canvasState.getSelected().forEach(figure -> figure.setColor("#" + Double.toHexString(figureColor.getValue().getRed()) + Double.toHexString(figureColor.getValue().getGreen()) + Double.toHexString(figureColor.getValue().getBlue()))));
+        figureStrokeColor.setOnMouseClicked(e -> canvasState.getSelected().forEach(figure -> figure.setStrokeColor("#" + Double.toHexString(figureStrokeColor.getValue().getRed()) + Double.toHexString(figureStrokeColor.getValue().getGreen()) + Double.toHexString(figureStrokeColor.getValue().getBlue()))));
+        figureStrokeWidth.setOnMouseClicked(e -> canvasState.getSelected().forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue())));
     }
 
 
@@ -124,7 +122,7 @@ public class PaintPanel extends BorderPane {
     public void figureButtonsListener() {
         for (FigureButtons button : FigureButtons.values())
             button.getButton().setOnMouseClicked((e) -> {
-               figureSelected.unselectAll();
+               canvasState.unselectAll();
                 actual = button;
             });
     }
@@ -185,12 +183,12 @@ public class PaintPanel extends BorderPane {
 					if(figure.belongs(eventPoint) || figure.inside(mouseEventPressed.getStartPoint(), eventPoint)) {					//Si encontro la figuar
 						//Funcion creada en el statusPane para que concatene el texto que tiene en el label
 						statusPane.appendText(figure.toString());
-						figureSelected.addFigure(figure);
+						canvasState.selectFigure(figure);
                         found= true;
 					}
 				}
 				if (!found) {
-                    figureSelected.unselectAll();
+                    canvasState.unselectAll();
 					statusPane.updateStatus("Ninguna figura encontrada");  //Actualiza el estado si no encontro la figura
 				}
 				redrawCanvas();
@@ -204,7 +202,7 @@ public class PaintPanel extends BorderPane {
                 double diffY = (event.getY() - mouseEventPressed.getY()) / 100;
 
                 // movemos la figura llamando a un metodo de la misma
-                for (Figure aux : figureSelected.getSelected())
+                for (Figure aux : canvasState.getSelected())
                     aux.moveTo(diffX, diffY);
 
                 // redibujamos todas las figuras pues las mismas tienen un orden de dibujo
@@ -213,17 +211,17 @@ public class PaintPanel extends BorderPane {
         });
 
         figureColor.setOnAction(event -> {
-            figureSelected.getSelected().forEach(figure -> figure.setColor(HexStringEngine.ColorToHexString(figureColor.getValue())));
+            canvasState.getSelected().forEach(figure -> figure.setColor(HexStringEngine.ColorToHexString(figureColor.getValue())));
             redrawCanvas();
         });
 
         figureStrokeColor.setOnAction(event -> {
-            figureSelected.getSelected().forEach(figure -> figure.setStrokeColor(HexStringEngine.ColorToHexString(figureStrokeColor.getValue())));
+            canvasState.getSelected().forEach(figure -> figure.setStrokeColor(HexStringEngine.ColorToHexString(figureStrokeColor.getValue())));
             redrawCanvas();
         });
 
         figureStrokeWidth.setOnMouseClicked(event -> {
-            figureSelected.getSelected().forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue()));
+            canvasState.getSelected().forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue()));
             redrawCanvas();
         });
 
@@ -234,7 +232,7 @@ public class PaintPanel extends BorderPane {
     void redrawCanvas() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (Figure figure : canvasState.figures())                                //al canvasState le pido las figuras e itero sobre ellas
-            figure.display();                                                        // dibujamos la figura en la pantalla
+            figure.display();                                                      // dibujamos la figura en la pantalla
     }
 
 }

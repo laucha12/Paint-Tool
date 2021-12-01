@@ -12,7 +12,7 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
      private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 20.0, MIN_STROKE = 0;
      private String color = Colorable.defaultColor(), strokeColor = Colorable.defaultStrokeColor();
      private double strokeWidth = DEFAULT_STROKE;
-     //private boolean selected = false;
+     private boolean selected = false;
 
      @Override
      public String toString(){
@@ -27,6 +27,11 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
 
      abstract public String identifier();
 
+     //SELECTABLE METHODS
+     public void select() {selected = true;}
+
+     public void unselect(){selected = false;}
+
      abstract public boolean belongs(Point point);
 
      //MOVABLE METHOD
@@ -37,8 +42,6 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
      }
 
      //COLORABLE METHODS
-
-     public void select() {setStrokeColor(Colorable.selectedStrokeColor());}
 
      public void setStrokeWidth(double strokeWidth) {
           this.strokeWidth = strokeWidth;
@@ -69,8 +72,8 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
      }
 
      @Override public String getStrokeColor() {
-          return strokeColor;
-          // return (selected) ? Corolable.defaultStrokeColor() : strokeColor ;  //Si esta seleccionada, retorna el color de seleccion, si no retorna el color propio.
+          //Si esta seleccionada, retorna el color de seleccion, si no retorna el color propio.
+          return (selected) ? Colorable.selectedStrokeColor() : strokeColor;
      }
 
      @Override public void setStrokeColor(String other) {

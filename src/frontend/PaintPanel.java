@@ -6,6 +6,7 @@ import backend.model.components.Point;
 import backend.model.interfaces.Colorable;
 import frontend.controllers.FigureButtons;
 import frontend.controllers.MouseEvent;
+import frontend.engines.HexStringEngine;
 import frontend.engines.SelectedEngine;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -211,6 +212,20 @@ public class PaintPanel extends BorderPane {
             }
         });
 
+        figureColor.setOnAction(event -> {
+            figureSelected.getSelected().forEach(figure -> figure.setColor(HexStringEngine.ColorToHexString(figureColor.getValue())));
+            redrawCanvas();
+        });
+
+        figureStrokeColor.setOnAction(event -> {
+            figureSelected.getSelected().forEach(figure -> figure.setStrokeColor(HexStringEngine.ColorToHexString(figureStrokeColor.getValue())));
+            redrawCanvas();
+        });
+
+        figureStrokeWidth.setOnMouseClicked(event -> {
+            figureSelected.getSelected().forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue()));
+            redrawCanvas();
+        });
 
         setLeft(buttonsBox);
         setRight(canvas);

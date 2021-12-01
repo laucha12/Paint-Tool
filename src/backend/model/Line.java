@@ -14,6 +14,7 @@ public abstract class Line extends Figure{
     public Line(Point start, Point end) {
        this.start = start;
        this.end = end;
+       
     }
 
     public Point getStart() {
@@ -59,8 +60,8 @@ public abstract class Line extends Figure{
 
 
     public boolean inside(Point point1, Point point2){
-        return true;//point2.getX() > getBottomRight().getX() && point2.getY() > getBottomRight().getY() &&
-                //point1.getX() < getTopLeft().getX() && point1.getY() < getTopLeft().getY();
+        return point2.getX() > this.getEnd().getX() && point2.getY() > getEnd().getY() &&
+                point1.getX() < getStart().getX() && point1.getY() < getStart().getY();
     }
 
 

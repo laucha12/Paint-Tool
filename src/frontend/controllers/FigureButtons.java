@@ -1,4 +1,4 @@
-package frontend;
+package frontend.controllers;
 
 import backend.model.components.Figure;
 import backend.model.components.Point;
@@ -50,17 +50,10 @@ public enum FigureButtons {
         this.button = new ToggleButton(name);
     }
 
-    public String getName() {
-        return name;
-    }
-
     public ToggleButton getButton() {
         return button;
     }
 
     abstract public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc);
 
-    public void activate() {
-        //this.getButton().setOnMouseClicked((e) -> actual = button);
-    }
 }

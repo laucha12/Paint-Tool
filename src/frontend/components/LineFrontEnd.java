@@ -7,17 +7,14 @@ import javafx.scene.paint.Color;
 
 //TODO: POINT FRONT-END????, IMPLEMENTS PRINT_RECTANGLE ??
 
-public class LineFrontEnd extends Line {
+final public class LineFrontEnd extends Line {
 
     private final GraphicsContext graphicsContext;
-    private static final double WIDTH = 20;
 
     public LineFrontEnd(Point start, Point end, GraphicsContext gc){
         super(start, end);
         this.graphicsContext = gc;
-        this.setStrokeColor(this.getColor());
     }
-
 
     @Override
     public void display() {
@@ -25,7 +22,5 @@ public class LineFrontEnd extends Line {
         graphicsContext.setLineWidth(getStrokeWidth());
         graphicsContext.strokeLine(getStart().getX(), getStart().getY(),getEnd().getX(),getEnd().getY());
     }
-
-
 
 }

@@ -13,24 +13,26 @@ public abstract class Rectangle extends Figure {
         this.bottomRight = bottomRight;
     }
 
-    @Override
-    public Collection<Point> getPoints() {
-        List<Point> toReturn = new ArrayList<>();
-        toReturn.add(topLeft);
-        toReturn.add(bottomRight);
-        return toReturn;
-    }
-
+    //SELECTABLE METHODS
     @Override
     public boolean belongs(Point point){
         return  point.getX() > this.getTopLeft().getX() && point.getX() < this.getBottomRight().getX() &&
                 point.getY() > this.getTopLeft().getY() && point.getY() < this.getBottomRight().getY();
     }
 
-
+    @Override
     public boolean inside(Point point1, Point point2){
         return point2.getX() > getBottomRight().getX() && point2.getY() > getBottomRight().getY() &&
           point1.getX() < getTopLeft().getX() && point1.getY() < getTopLeft().getY();
+    }
+
+    //GETTERS
+    @Override
+    public Collection<Point> getPoints() {
+        List<Point> toReturn = new ArrayList<>();
+        toReturn.add(topLeft);
+        toReturn.add(bottomRight);
+        return toReturn;
     }
 
     public Point getTopLeft() {

@@ -17,32 +17,7 @@ public abstract class Ellipse extends Figure {
         this.minAxis = minAxis;
     }
 
-    @Override
-    public Collection<Point> getPoints() {
-        List<Point> toReturn = new ArrayList<>();
-        toReturn.add(centerPoint);
-        return toReturn;
-    }
-
-    @Override
-    public double getWidth() {
-        return minAxis;
-    }
-
-    @Override
-    public double getHeight() {
-        return maxAxis;
-    }
-
-    @Override
-    public String identifier() {
-        return NAME;
-    }
-
-    public Point getCenterPoint() {
-        return centerPoint;
-    }
-
+    //SELECTABLE METHODS
 
     @Override
     public boolean belongs(Point point){
@@ -69,6 +44,34 @@ public abstract class Ellipse extends Figure {
             return false;
         }
         return true;
+    }
+
+    //GETTERS
+
+    @Override
+    public Collection<Point> getPoints() {
+        List<Point> toReturn = new ArrayList<>();
+        toReturn.add(centerPoint);
+        return toReturn;
+    }
+
+    @Override
+    public double getWidth() {
+        return minAxis;
+    }
+
+    @Override
+    public double getHeight() {
+        return maxAxis;
+    }
+
+    @Override
+    public String identifier() {
+        return NAME;
+    }
+
+    public Point getCenterPoint() {
+        return centerPoint;
     }
 
 }

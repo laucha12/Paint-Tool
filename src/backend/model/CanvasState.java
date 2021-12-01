@@ -21,17 +21,10 @@ public class CanvasState {
         return new ArrayList<>(list);
     }
 
-    //Nuevos metodos creados:
-    /*public void sendFigureToBack(Figure figure){
-        list.remove(figure);
-        list.add(0,figure);
-    }*/
-
     public void sendFigureToBack(Figure figure){
         list.remove(figure);
         list.addFirst(figure);
     }
-
 
     public void sendFigureToFront(Figure figure){
         list.remove(figure);

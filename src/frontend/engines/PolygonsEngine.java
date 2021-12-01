@@ -1,11 +1,11 @@
-package frontend.components;
+package frontend.engines;
 
 import backend.model.components.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public interface PrintPolygons {
-    default void print(GraphicsContext gc, Point centerPoint, double width, double length, Color fill, Color stroke, double lineWidth){
+final public class PolygonsEngine {
+    public static void print(GraphicsContext gc, Point centerPoint, double width, double length, Color fill, Color stroke, double lineWidth){
         gc.setFill(fill);
         gc.setStroke(stroke);
         gc.setLineWidth(lineWidth);

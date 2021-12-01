@@ -142,11 +142,9 @@ public class PaintPanel extends BorderPane {
 		});
 
 
-		//TODO fijarse si hay que cambiarlo
 		canvas.setOnMouseClicked(event -> {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
-
 				statusPane.updateStatus ("Se seleccionó: ");
 				//Bucos dentro de las figuras cuales tienen los puntos de seleccion dentro
 				for (Figure figure : canvasState.figures()) {
@@ -158,7 +156,6 @@ public class PaintPanel extends BorderPane {
 						figureSelected.add(figure);
 					}
 				}
-
 				if (figureSelected.size() == 0 ) {
 					unSelect();
 					statusPane.updateStatus("Ninguna figura encontrada");  //Actualiza el estado si no encontro la figura

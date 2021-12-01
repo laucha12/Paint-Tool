@@ -42,7 +42,10 @@ public class ButtonsEngine {
 
     public void startListener(CanvasState canvasState, Canvas canvas, StatusPanel statusPane) {
         for (FunctionButtons buttons : FunctionButtons.values())
-            buttons.getButton().setOnMouseClicked((e) -> buttons.apply(canvasState, canvas));
+            buttons.getButton().setOnMouseClicked( (e) -> {
+                buttons.apply(canvasState, canvas);
+                figureButtonSelected = false;
+            });
 
         for (FigureButtons button : FigureButtons.values())
             button.getButton().setOnMouseClicked((e) -> {
@@ -110,6 +113,10 @@ public class ButtonsEngine {
                 // redibujamos todas las figuras pues las mismas tienen un orden de dibujo
                 CanvasEngine.redrawCanvas(canvasState, canvas);
             }
+        });
+
+        selectionButton.setOnMousePressed(event -> {
+            figureButtonSelected = false;
         });
     }
 

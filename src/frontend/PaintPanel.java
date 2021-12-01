@@ -6,6 +6,7 @@ import backend.model.components.Point;
 import backend.model.interfaces.Colorable;
 import frontend.controllers.FigureButtons;
 import frontend.controllers.MouseEvent;
+import frontend.engines.SelectedEngine;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -46,7 +47,7 @@ public class PaintPanel extends BorderPane {
     // StatusBar
     StatusPanel statusPane;
 
-    ArrayList<Figure> figureSelected = new ArrayList<>();
+    SelectedEngine figureSelected = new SelectedEngine();
 
     MouseEvent mouseEventPressed; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
 
@@ -83,18 +84,21 @@ public class PaintPanel extends BorderPane {
 
     public void deleteButtonListener() {
         deleteButton.setOnMouseClicked((e) -> {
-            canvasState.delete(figureSelected);
-            unSelect();
+            canvasState.delete(figureSelected.getSelected());
+            figureSelected.unselectAll();
+            redrawCanvas();
         });
 
         sendToBackButton.setOnMouseClicked((event) -> {
-            canvasState.sendMultipleFiguresToBack(figureSelected);
-            unSelect();
+            canvasState.sendMultipleFiguresToBack(figureSelected.getSelected());
+            figureSelected.unselectAll();
+            redrawCanvas();
         });
 
         sendToFrontButton.setOnMouseClicked((event) -> {
-            canvasState.sendMultipleFiguresToFront(figureSelected);
-            unSelect();
+            canvasState.sendMultipleFiguresToFront(figureSelected.getSelected());
+            figureSelected.unselectAll();
+            redrawCanvas();
         });
     }
 
@@ -107,9 +111,9 @@ public class PaintPanel extends BorderPane {
 
 
     public void colorButtonsListener() {
-        figureColor.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setColor("#" + Double.toHexString(figureColor.getValue().getRed()) + Double.toHexString(figureColor.getValue().getGreen()) + Double.toHexString(figureColor.getValue().getBlue()))));
-        figureStrokeColor.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setStrokeColor("#" + Double.toHexString(figureStrokeColor.getValue().getRed()) + Double.toHexString(figureStrokeColor.getValue().getGreen()) + Double.toHexString(figureStrokeColor.getValue().getBlue()))));
-        figureStrokeWidth.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue())));
+        figureColor.setOnMouseClicked(e -> figureSelected.getSelected().forEach(figure -> figure.setColor("#" + Double.toHexString(figureColor.getValue().getRed()) + Double.toHexString(figureColor.getValue().getGreen()) + Double.toHexString(figureColor.getValue().getBlue()))));
+        figureStrokeColor.setOnMouseClicked(e -> figureSelected.getSelected().forEach(figure -> figure.setStrokeColor("#" + Double.toHexString(figureStrokeColor.getValue().getRed()) + Double.toHexString(figureStrokeColor.getValue().getGreen()) + Double.toHexString(figureStrokeColor.getValue().getBlue()))));
+        figureStrokeWidth.setOnMouseClicked(e -> figureSelected.getSelected().forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue())));
     }
 
 
@@ -119,7 +123,7 @@ public class PaintPanel extends BorderPane {
     public void figureButtonsListener() {
         for (FigureButtons button : FigureButtons.values())
             button.getButton().setOnMouseClicked((e) -> {
-                unSelect();
+               figureSelected.unselectAll();
                 actual = button;
             });
     }
@@ -173,18 +177,19 @@ public class PaintPanel extends BorderPane {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
 				statusPane.updateStatus ("Se seleccionó: ");
+                boolean found=false;
 				//Bucos dentro de las figuras cuales tienen los puntos de seleccion dentro
 				for (Figure figure : canvasState.figures()) {
 					//llamo a las funciones para verificar el bellong tanto de un punto como de una figura
 					if(figure.belongs(eventPoint) || figure.inside(mouseEventPressed.getStartPoint(), eventPoint)) {					//Si encontro la figuar
-						figure.select();
 						//Funcion creada en el statusPane para que concatene el texto que tiene en el label
 						statusPane.appendText(figure.toString());
-						figureSelected.add(figure);
+						figureSelected.addFigure(figure);
+                        found= true;
 					}
 				}
-				if (figureSelected.size() == 0 ) {
-					unSelect();
+				if (!found) {
+                    figureSelected.unselectAll();
 					statusPane.updateStatus("Ninguna figura encontrada");  //Actualiza el estado si no encontro la figura
 				}
 				redrawCanvas();
@@ -198,7 +203,7 @@ public class PaintPanel extends BorderPane {
                 double diffY = (event.getY() - mouseEventPressed.getY()) / 100;
 
                 // movemos la figura llamando a un metodo de la misma
-                for (Figure aux : figureSelected)
+                for (Figure aux : figureSelected.getSelected())
                     aux.moveTo(diffX, diffY);
 
                 // redibujamos todas las figuras pues las mismas tienen un orden de dibujo
@@ -209,18 +214,6 @@ public class PaintPanel extends BorderPane {
 
         setLeft(buttonsBox);
         setRight(canvas);
-    }
-
-    public void unSelect() {
-        //le cambio el borde a negro de las figuras que estaban seleccionadas
-        for (Figure aux : figureSelected)
-            aux.resetStrokeColor();
-
-        //limpio las figuras seleccion
-        figureSelected.clear();
-
-        //dibjuamos de vuelta el canvas
-        redrawCanvas();
     }
 
     void redrawCanvas() {

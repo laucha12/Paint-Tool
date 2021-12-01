@@ -1,4 +1,4 @@
-package backend.model;
+package backend.model.components;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,16 +9,12 @@ public abstract class Ellipse extends Figure {
 
     protected final Point centerPoint;
     protected final double minAxis, maxAxis;
+    private final static String NAME = "Elipse";
 
     public Ellipse(Point centerPoint, double minAxis, double maxAxis) {
         this.centerPoint = centerPoint;
         this.maxAxis = maxAxis;
         this.minAxis = minAxis;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Ellipse [Centro: %s, Radio: %.2f]", centerPoint, minAxis);
     }
 
     @Override
@@ -40,7 +36,7 @@ public abstract class Ellipse extends Figure {
 
     @Override
     public String identifier() {
-        return null;
+        return NAME;
     }
 
     public Point getCenterPoint() {
@@ -49,17 +45,13 @@ public abstract class Ellipse extends Figure {
 
 
     @Override
-    public void moveTo(double x, double y) {
-        centerPoint.moveTo(x,y);
-    }
-
-    @Override
     public boolean belongs(Point point){
          return ((Math.pow(this.getCenterPoint().getX() - point.getX(), 2)/Math.pow(getWidth(),2) ) +
                  (Math.pow(this.getCenterPoint().getY() - point.getY(), 2)/Math.pow(getHeight(),2)) ) <= 1;
 
     }
 
+    @Override
     public boolean inside(Point point1, Point point2) {
         if (centerPoint.getX() + getWidth()  > point2.getX()) {
             //it is outside of the rectangle on the right side

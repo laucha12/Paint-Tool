@@ -1,6 +1,9 @@
 package frontend;
 
 import backend.model.*;
+import backend.model.components.Figure;
+import backend.model.components.Point;
+import backend.model.interfaces.Colorable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -180,13 +183,18 @@ public class PaintPanel extends BorderPane {
 			}
 		});
 
+		figureColor.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setColor("#" + Double.toHexString(figureColor.getValue().getRed()) + Double.toHexString(figureColor.getValue().getGreen()) + Double.toHexString(figureColor.getValue().getBlue()))));
+		figureStrokeColor.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setStrokeColor("#" + Double.toHexString(figureStrokeColor.getValue().getRed()) + Double.toHexString(figureStrokeColor.getValue().getGreen()) + Double.toHexString(figureStrokeColor.getValue().getBlue()))));
+		figureStrokeWidth.setOnMouseClicked(e -> figureSelected.forEach(figure -> figure.setStrokeWidth(figureStrokeWidth.getValue())));
+
 		setLeft(buttonsBox);
 		setRight(canvas);
 	}
+
      void unSelect(){
 		//le cambio el borde a negro de las figuras que estaban seleccionadas
-		 for (Figure aux:figureSelected)
-			 aux.setStrokeColor(Colorable.defaultStrokeColor());
+		 for (Figure aux : figureSelected)
+			 aux.resetStrokeColor();
 
 		 //limpio las figuras seleccion
 		 figureSelected.clear();

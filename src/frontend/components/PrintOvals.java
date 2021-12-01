@@ -1,16 +1,12 @@
-package frontend.Elements;
+package frontend.components;
 
-import backend.model.Circle;
-import backend.model.Ellipse;
-import backend.model.Figure;
-
-import backend.model.Point;
+import backend.model.components.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public interface PrintOvals {
 
-    default void print(GraphicsContext gc, Point centerPoint, double width, double length, Color fill, Color stroke, double lineWidth){
+    default void printOval(GraphicsContext gc, Point centerPoint, double width, double length, Color fill, Color stroke, double lineWidth){
         gc.setFill(fill);
         gc.setStroke(stroke);
         gc.setLineWidth(lineWidth);

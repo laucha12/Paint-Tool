@@ -1,8 +1,8 @@
 package frontend;
 
 import backend.model.CanvasState;
-import backend.model.Figure;
-import backend.model.Point;
+import backend.model.components.Figure;
+import backend.model.components.Point;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;

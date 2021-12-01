@@ -1,4 +1,4 @@
-package backend.model;
+package backend.model.components;
 
 // It isn't reallu a rectangle, it's just a path between two points (in the backend)
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Line extends Figure{
+public abstract class Line extends Figure {
 
     private Point start, end;
     private static final double WIDTH = 10;
@@ -51,13 +51,6 @@ public abstract class Line extends Figure{
         toReturn.add(end);
         return toReturn;
     }
-
-    @Override
-    public void moveTo(double x, double y) {
-        start.moveTo(x, y);
-        end.moveTo(x, y);
-    }
-
 
     public boolean inside(Point point1, Point point2){
         return point2.getX() > this.getEnd().getX() && point2.getY() > getEnd().getY() &&

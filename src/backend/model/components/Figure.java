@@ -1,12 +1,16 @@
-package backend.model;
+package backend.model.components;
+
+import backend.model.interfaces.Colorable;
+import backend.model.interfaces.Drawable;
+import backend.model.interfaces.Movable;
+import backend.model.interfaces.Selectable;
 
 import java.util.Collection;
 
-public abstract class Figure implements Movable, Drawable, Colorable, Selectable{
+public abstract class Figure implements Movable, Drawable, Colorable, Selectable {
 
      private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 20.0, MIN_STROKE = 0;
-     private String color="#FFFF00", strokeColor="#000000";
-     private boolean isSelected = false;
+     private String color = Colorable.defaultColor(), strokeColor = Colorable.defaultStrokeColor();
      private double strokeWidth = DEFAULT_STROKE;
 
      @Override
@@ -24,12 +28,16 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
 
      abstract public boolean belongs(Point point);
 
-     public void select() {
-          this.isSelected = true;
-          setStrokeColor("#A52A2A");
+     //MOVABLE METHOD
+     @Override
+     public void moveTo(double x, double y) {
+          for (Point point : getPoints())
+               point.moveTo(x, y);
      }
 
-     public boolean isSelected() { return isSelected; }
+     //COLORABLE METHODS
+
+     public void select() {setStrokeColor(Colorable.selectedStrokeColor());}
 
      public void setStrokeWidth(double strokeWidth) {
           this.strokeWidth = strokeWidth;
@@ -51,26 +59,20 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
           return MAX_STROKE;
      }
 
-     @Override
-     public String getColor() {
+     @Override public String getColor() {
           return color;
      }
 
-     @Override
-     public void setColor(String other) {
+     @Override public void setColor(String other) {
           color = other;
      }
 
-     @Override
-     public String getStrokeColor() {
+     @Override public String getStrokeColor() {
           return strokeColor;
      }
 
-     @Override
-     public void setStrokeColor(String other) {
+     @Override public void setStrokeColor(String other) {
           strokeColor = other;
      }
-
-
 
 }

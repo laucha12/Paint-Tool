@@ -1,11 +1,10 @@
 package backend.model;
 
-import backend.model.Figure;
+import backend.model.components.Figure;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 public class CanvasState {
 

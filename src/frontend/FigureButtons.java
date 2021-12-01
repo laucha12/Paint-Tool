@@ -1,8 +1,8 @@
 package frontend;
 
-import backend.model.Figure;
-import backend.model.Point;
-import frontend.Elements.*;
+import backend.model.components.Figure;
+import backend.model.components.Point;
+import frontend.components.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ToggleButton;
 

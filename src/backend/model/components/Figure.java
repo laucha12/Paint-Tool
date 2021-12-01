@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public abstract class Figure implements Movable, Drawable, Colorable, Selectable {
 
-     private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 50.0, MIN_STROKE = 0;
+     private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 50.0, MIN_STROKE = 1.0;
      private String color = Colorable.defaultColor(), strokeColor = Colorable.defaultStrokeColor();
      private double strokeWidth = DEFAULT_STROKE;
      private boolean selected = false;

@@ -18,7 +18,6 @@ final public class EllipseFrontEnd extends Ellipse {
     @Override
     public void display() {
         OvalsEngine.print(graphicsContext, getCenterPoint(), getWidth(), getHeight(), Color.web(getColor()), Color.web(getStrokeColor()), getStrokeWidth());
-
     }
 
 }

@@ -43,7 +43,7 @@ public class CanvasState {
         list.removeAll(figures);
     }
 
-    public void clear() {
+    public void resetCanvas() {
         list.clear();
     }
 

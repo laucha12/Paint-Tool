@@ -101,8 +101,7 @@ public class PaintPanel extends BorderPane {
 
     public void clearButtonListener() {
         clearButton.setOnMouseClicked((e) -> {
-            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());    //Se borra lo presente en la pantalla
-            canvasState.clear();                                                //En el estado del back se borran las figuras
+                                                        //En el estado del back se borran las figuras
         });
     }
 
@@ -153,6 +152,7 @@ public class PaintPanel extends BorderPane {
 			actual=null;
 			redrawCanvas();
 		});
+
         canvas.setOnMouseReleased(event -> {
 
             mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));

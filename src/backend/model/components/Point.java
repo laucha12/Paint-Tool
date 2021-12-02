@@ -45,4 +45,13 @@ public class Point implements Movable {
     protected void updateY(double y) {
         this.y += y;
     }
+    @Override
+    public boolean equals(Object other){
+        if (this == other)
+            return true;
+        if(! (other instanceof Point))
+            return false;
+        Point aux= (Point) other;
+        return aux.x==this.x && aux.y == this.y;
+    }
 }

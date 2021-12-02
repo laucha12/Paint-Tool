@@ -84,7 +84,8 @@ public class ButtonsEngine {
                 //Bucos dentro de las figuras cuales tienen los puntos de seleccion dentro
                 for (Figure figure : canvasState.figures()) {
                     //llamo a las funciones para verificar el bellong tanto de un punto como de una figura
-                    if(figure.belongs(eventPoint) || figure.inside(mouseEventPressed.getStartPoint(), eventPoint)) {					//Si encontro la figuar
+                    // Pido que el punto este dentro de donde se hizo click y pido que el punto donde inicio la accion sea la misma de donde termino la accion
+                    if((figure.belongs(eventPoint) && mouseEventPressed.getStartPoint().equals(eventPoint) )|| figure.inside(mouseEventPressed.getStartPoint(), eventPoint)) {					//Si encontro la figuar
                         //Funcion creada en el statusPane para que concatene el texto que tiene en el label
                         statusPane.appendText(figure.toString());
                         canvasState.selectFigure(figure);

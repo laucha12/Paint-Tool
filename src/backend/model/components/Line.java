@@ -19,12 +19,10 @@ public abstract class Line extends Figure {
        this.setStrokeColor(this.getColor()); //Necesario hacer esto sino aparece toda negra la lines
     }
 
+    //Por respuesta del foro de la catedra no hace falta que se pueda seleccionar ni que se muestre en el status panel
     @Override
     public boolean belongs(Point point){
-        double m = ( this.getStart().getY() - getEnd().getY() ) / ( this.getStart().getX() - getEnd().getX() );
-        double ordenada = this.getStart().getY() - this.getStart().getX() * m;
-        return Math.abs( point.getY() - ( m * point.getX()+ordenada)) < 2 &&  point.getX() > this.getStart().getX() && point.getX() < this.getEnd().getX() &&
-                point.getY() > this.getStart().getY() && point.getY() < this.getEnd().getY() ;
+     return false;
     }
 
     @Override

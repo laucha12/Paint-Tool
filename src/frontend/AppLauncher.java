@@ -21,7 +21,7 @@ public class AppLauncher extends Application {
 
 		Scene scene = new Scene(frame);				  // We create a scene for JavaFX to render in the screen
 
-		primaryStage.setResizable(true);             // We define it such that we cannot change the screen size
+		primaryStage.setResizable(false);             // We define it such that we cannot change the screen size
 
 		primaryStage.setScene(scene);				 // We set the scene to be that we have defined based upon
 													 // upon our canvas state and main frame

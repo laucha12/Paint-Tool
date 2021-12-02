@@ -9,6 +9,7 @@ import frontend.controllers.FunctionButtons;
 import frontend.controllers.MouseEvent;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
@@ -64,9 +65,15 @@ public class ButtonsEngine {
             mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
 
             // si hay algun boton seleccionado de los toggles se llama al enum que nos genera las figuras
-            if (figureButtonSelected)
-                canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), canvas.getGraphicsContext2D()));
-
+            try {
+                if (figureButtonSelected)
+                    canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), canvas.getGraphicsContext2D()));
+            }catch(Exception e){
+                Alert errorAlert= new Alert(Alert.AlertType.WARNING);
+                errorAlert.setHeaderText("Error en la creacion de la figura");
+                errorAlert.setContentText(e.getMessage());
+                errorAlert.showAndWait();
+            }
             CanvasEngine.redrawCanvas(canvasState, canvas);
         });
 
@@ -79,23 +86,21 @@ public class ButtonsEngine {
         canvas.setOnMouseClicked(event -> {
             if(selectionButton.isSelected()) {
                 Point eventPoint = new Point(event.getX(), event.getY());
-                statusPane.updateStatus ("Se seleccionó: ");
-                boolean found = false;
+
+                statusPane.selectionModeStart();
+                canvasState.selectionModeStart();
+
                 //Bucos dentro de las figuras cuales tienen los puntos de seleccion dentro
                 for (Figure figure : canvasState.figures()) {
                     //llamo a las funciones para verificar el bellong tanto de un punto como de una figura
                     // Pido que el punto este dentro de donde se hizo click y pido que el punto donde inicio la accion sea la misma de donde termino la accion
-                    if( canvasState.selectFigure(figure,mouseEventPressed.getStartPoint(),eventPoint)) {					//Si encontro la figuar
+                    if( canvasState.selectFigure(figure,mouseEventPressed.getStartPoint(),eventPoint)) 					//Si encontro la figuar
                         //Funcion creada en el statusPane para que concatene el texto que tiene en el label
                         statusPane.appendText(figure.toString());
-                        found= true;
-                    }
-                }
-                if (!found) {
-                    statusPane.updateStatus("Ninguna figura encontrada");  //Actualiza el estado si no encontro la figura
-                    canvasState.unselectAll();
                 }
 
+                statusPane.selectionModeEnded();
+                canvasState.selectionModeEnded();
                 CanvasEngine.redrawCanvas(canvasState, canvas);
             }
         });

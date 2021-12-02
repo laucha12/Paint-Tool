@@ -16,6 +16,7 @@ public class StatusPanel extends BorderPane {
 	private final Label statusLabel;
 	private final CanvasState canvasState;
 	private static final String DEFAULT_PANEL_STRING = "Paint 1.0";
+	private static final String SELECTED_MESSAGE ="Se seleccionó: ";
 
 	//Defino como se renderisa el panel de status, la posicion color y tamaniio de letra
 	public StatusPanel(CanvasState canvasState) {
@@ -59,6 +60,16 @@ public class StatusPanel extends BorderPane {
 		} else {
 			updateStatus(eventPoint.toString());
 		}
+	}
+
+	public void selectionModeStart() {
+		updateStatus (SELECTED_MESSAGE);
+
+	}
+
+	public void selectionModeEnded() {
+		if( statusLabel.getText().equals(SELECTED_MESSAGE))
+			updateStatus("Ninguna figura fue encontrada");
 	}
 
 }

@@ -1,5 +1,7 @@
 package backend.model.components;
 
+import backend.model.exceptions.BackEndException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +11,9 @@ public abstract class Rectangle extends Figure {
     private final Point topLeft, bottomRight;
 
     public Rectangle(Point topLeft, Point bottomRight) {
+        if(topLeft.getX()>bottomRight.getX()||topLeft.getY()>bottomRight.getY()){
+            throw new BackEndException("No se puede armar la figura");
+        }
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
     }

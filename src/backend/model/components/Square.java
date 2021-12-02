@@ -15,6 +15,6 @@ public abstract class Square extends Rectangle {
     }
 
     @Override
-    public String identifier() { return NAME; }
+    public final String identifier() { return NAME; }
 
 }

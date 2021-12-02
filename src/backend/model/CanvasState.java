@@ -12,8 +12,12 @@ public class CanvasState {
 
     //Guarda una lista con las figuras que estan presentes en el canvas
     private final LinkedList<Figure> list = new LinkedList<>();
+
     //Guarda una lista con las figuras selccionadas
     private final List<Figure> selected = new ArrayList<>();
+
+    //Guarda el numero de figuras seleccionadas antes de entrar de nuevo a un selection mode
+    private int lastSelectedElementsAmount;
 
     public void addFigure(Figure figure) {
         list.add(figure);
@@ -75,6 +79,15 @@ public class CanvasState {
 
     public void resetCanvas() {
         list.clear();
+    }
+
+    public void selectionModeStart() {
+        lastSelectedElementsAmount = getSelected().size();
+    }
+
+    public void selectionModeEnded() {
+        if(lastSelectedElementsAmount == getSelected().size())
+            unselectAll();
     }
 
 }

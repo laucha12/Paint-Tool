@@ -46,15 +46,25 @@ public class CanvasState {
         figures.forEach(this::sendFigureToFront);
     }
 
-    public boolean selectFigure(Figure figure, Point actualPoint, Point eventPoint){
-        //decido si una figura esta seleccionada o no viendo si los puntos estan dentro de la misma o no
-        if((figure.belongs(eventPoint) && actualPoint.equals(eventPoint) )|| figure.inside(actualPoint, eventPoint)) {
-            figure.select();
-            //La agrego a mi lista de seleccionadas
-            selected.add(figure);
-            return true;
+    public String selectFigure( Point actualPoint, Point eventPoint){
+        StringBuilder aux= new StringBuilder("Figuras seleccionadas: ");
+        for (int i = list.size()-1; i>=0;i--) {
+
+            Figure figure = list.get(i);
+            //llamo a las funciones para verificar el bellong tanto de un punto como de una figura
+            // Pido que el punto este dentro de donde se hizo click y pido que el punto donde inicio la accion sea la misma de donde termino la accion
+            if(figure.inside(actualPoint, eventPoint)) {
+                figure.select();
+                selected.add(figure);
+                aux.append(figure.toString());
+            }else if ((figure.belongs(eventPoint) && actualPoint.equals(eventPoint) )){
+                figure.select();
+                selected.add(figure);
+                  aux.append(figure.toString());
+                  return  aux.toString();
+            }
         }
-        return false;
+        return aux.toString();
     }
 
 

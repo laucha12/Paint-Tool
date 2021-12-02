@@ -29,6 +29,7 @@ public class PaintPanel extends BorderPane {
         colorControllersEngine.setupButtons(buttonsBox);
         buttonsEngine.setupButtons(buttonsBox);
 
+        //JavaFX styling
         buttonsBox.setPadding(new Insets(5));
         buttonsBox.setStyle("-fx-background-color: #999");
         buttonsBox.setPrefWidth(100);

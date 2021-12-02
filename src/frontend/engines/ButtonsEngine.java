@@ -69,6 +69,7 @@ public class ButtonsEngine {
                 if (figureButtonSelected)
                     canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), canvas.getGraphicsContext2D()));
             }catch(Exception e){
+                //En caso de no poder crear la figura, avisamos al usuario
                 Alert errorAlert= new Alert(Alert.AlertType.WARNING);
                 errorAlert.setHeaderText("Error en la creacion de la figura");
                 errorAlert.setContentText(e.getMessage());
@@ -103,8 +104,8 @@ public class ButtonsEngine {
                 double diffY = (event.getY() - mouseEventPressed.getY()) / 100;
 
                 // movemos la figura llamando a un metodo de la misma
-                for (Figure aux : canvasState.getSelected())
-                    aux.moveTo(diffX, diffY);
+                for (Figure figure : canvasState.getSelected())
+                    figure.moveTo(diffX, diffY);
 
                 // redibujamos todas las figuras pues las mismas tienen un orden de dibujo
                 CanvasEngine.redrawCanvas(canvasState, canvas);

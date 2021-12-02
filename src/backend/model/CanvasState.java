@@ -1,6 +1,7 @@
 package backend.model;
 
 import backend.model.components.Figure;
+import backend.model.components.Point;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,12 +42,17 @@ public class CanvasState {
         figures.forEach(this::sendFigureToFront);
     }
 
-    public void selectFigure(Figure figure){
-        //Marco que en la figura que esta seleccionada
-        figure.select();
-        //La agrego a mi lista de seleccionadas
-        selected.add(figure);
+    public boolean selectFigure(Figure figure, Point actualPoint, Point eventPoint){
+        //decido si una figura esta seleccionada o no viendo si los puntos estan dentro de la misma o no
+        if((figure.belongs(eventPoint) && actualPoint.equals(eventPoint) )|| figure.inside(actualPoint, eventPoint)) {
+            figure.select();
+            //La agrego a mi lista de seleccionadas
+            selected.add(figure);
+            return true;
+        }
+        return false;
     }
+
 
     public Collection<Figure> getSelected(){
         return new ArrayList<>(selected);

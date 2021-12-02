@@ -80,7 +80,7 @@ public class ButtonsEngine {
             if(selectionButton.isSelected()) {
                 Point eventPoint = new Point(event.getX(), event.getY());
                 statusPane.updateStatus ("Se seleccionó: ");
-                boolean found=false;
+                boolean found = false;
                 //Bucos dentro de las figuras cuales tienen los puntos de seleccion dentro
                 for (Figure figure : canvasState.figures()) {
                     //llamo a las funciones para verificar el bellong tanto de un punto como de una figura

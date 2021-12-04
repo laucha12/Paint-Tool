@@ -1,5 +1,6 @@
 package backend.model.components;
 
+import backend.model.ColorStyle;
 import backend.model.exceptions.BackEndException;
 
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ public abstract class Rectangle extends Figure {
 
     private final Point topLeft, bottomRight;
 
-    public Rectangle(Point topLeft, Point bottomRight) {
+    public Rectangle(Point topLeft, Point bottomRight, ColorStyle color) {
+        super(color);
         if(topLeft.getX()>bottomRight.getX()||topLeft.getY()>bottomRight.getY()){
             throw new BackEndException("No se puede armar la figura");
         }

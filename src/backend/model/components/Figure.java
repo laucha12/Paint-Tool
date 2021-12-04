@@ -1,5 +1,6 @@
 package backend.model.components;
 
+import backend.model.ColorStyle;
 import backend.model.interfaces.Colorable;
 import backend.model.interfaces.Drawable;
 import backend.model.interfaces.Movable;
@@ -10,10 +11,12 @@ import java.util.Collection;
 public abstract class Figure implements Movable, Drawable, Colorable, Selectable {
 
      private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 50.0, MIN_STROKE = 1.0;
-     private String color = Colorable.defaultColor(), strokeColor = Colorable.defaultStrokeColor();
-     private double strokeWidth = DEFAULT_STROKE;
+     private ColorStyle color;
      private boolean selected = false;
 
+     public Figure (ColorStyle color){
+          this.color=color;
+     }
      @Override
      public String toString(){
           return identifier() + "[" + getPoints() + "]";
@@ -44,11 +47,11 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
      //COLORABLE METHODS
 
      public void setStrokeWidth(double strokeWidth) {
-          this.strokeWidth = strokeWidth;
-     }
+          this.color.setWidthStroke(strokeWidth);
+}
 
      public double getStrokeWidth(){
-          return strokeWidth;
+          return color.getWidthStroke();
      }
 
      public static double getDefaultStrokeWidth(){
@@ -64,20 +67,20 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
      }
 
      @Override public String getColor() {
-          return color;
+          return color.getColorFigure();
      }
 
      @Override public void setColor(String other) {
-          color = other;
+          color.setColorFigure(other);
      }
 
      @Override public String getStrokeColor() {
           //Si esta seleccionada, retorna el color de seleccion, si no retorna el color propio.
-          return (selected) ? Colorable.selectedStrokeColor() : strokeColor;
+          return (selected) ? Colorable.selectedStrokeColor() : color.getColorStroke();
      }
 
      @Override public void setStrokeColor(String other) {
-          strokeColor = other;
+          color.setColorStroke(other);
      }
 
 }

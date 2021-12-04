@@ -2,6 +2,8 @@ package backend.model.components;
 
 // It isn't reallu a rectangle, it's just a path between two points (in the backend)
 
+import backend.model.ColorStyle;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +14,9 @@ public abstract class Line extends Figure {
     private final Point end;
     private static final double WIDTH = 10;
 
-    public Line(Point start, Point end) {
+    public Line(Point start, Point end, ColorStyle color) {
+        super(color);
+
        this.start = start;
        this.end = end;
        

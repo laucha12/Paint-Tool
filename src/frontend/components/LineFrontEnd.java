@@ -1,5 +1,6 @@
 package frontend.components;
 
+import backend.model.ColorStyle;
 import backend.model.components.Line;
 import backend.model.components.Point;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,8 +12,8 @@ final public class LineFrontEnd extends Line {
 
     private final GraphicsContext graphicsContext;
 
-    public LineFrontEnd(Point start, Point end, GraphicsContext gc){
-        super(start, end);
+    public LineFrontEnd(Point start, Point end, GraphicsContext gc, ColorStyle color){
+        super(start, end,color);
         this.graphicsContext = gc;
     }
 

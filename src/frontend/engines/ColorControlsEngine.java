@@ -50,4 +50,17 @@ public class ColorControlsEngine {
             CanvasEngine.redrawCanvas(canvasState, canvas);
         });
         }
+
+        public String getFigureColor(){
+            return HexStringEngine.ColorToHexString(figureColor.getValue());
+        }
+
+        public String getStrokeColor(){
+            return HexStringEngine.ColorToHexString(figureStrokeColor.getValue());
+        }
+
+        public double getStrokeWidth(){
+            return figureStrokeWidth.getValue();
+        }
+
 }

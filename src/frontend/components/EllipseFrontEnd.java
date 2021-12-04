@@ -1,5 +1,6 @@
 package frontend.components;
 
+import backend.model.ColorStyle;
 import backend.model.components.Ellipse;
 import backend.model.components.Point;
 import frontend.engines.OvalsEngine;
@@ -10,8 +11,8 @@ final public class EllipseFrontEnd extends Ellipse {
 
     private final GraphicsContext graphicsContext;
 
-    public EllipseFrontEnd(Point middlePoint, double minAxis, double maxAxis, GraphicsContext graphicsContext) {
-        super(middlePoint, minAxis, maxAxis);
+    public EllipseFrontEnd(Point middlePoint, double minAxis, double maxAxis, GraphicsContext graphicsContext, ColorStyle color) {
+        super(middlePoint, minAxis, maxAxis,color);
         this.graphicsContext = graphicsContext;
     }
 

@@ -1,6 +1,7 @@
 package frontend.engines;
 
 import backend.model.CanvasState;
+import backend.model.ColorStyle;
 import backend.model.components.Figure;
 import backend.model.components.Point;
 import frontend.StatusPanel;
@@ -20,6 +21,7 @@ public class ButtonsEngine {
     private FigureButtons actual;
     private MouseEvent mouseEventPressed; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
     private boolean figureButtonSelected = false;
+    ColorControlsEngine colorControllersEngine = new ColorControlsEngine();
 
    public void setupButtons(VBox buttonsBox) {
 
@@ -30,6 +32,7 @@ public class ButtonsEngine {
                FunctionButtons.TOFRONT.getButton(), selectionButton};
 
        ToggleGroup tools = new ToggleGroup();
+       colorControllersEngine.setupButtons(buttonsBox);
 
        for (ToggleButton tool : toolsArr) {
            tool.setMinWidth(90);
@@ -42,6 +45,8 @@ public class ButtonsEngine {
 
 
     public void startListener(CanvasState canvasState, Canvas canvas, StatusPanel statusPane) {
+
+        colorControllersEngine.startListener(canvasState, canvas);
         for (FunctionButtons buttons : FunctionButtons.values())
             buttons.getButton().setOnMouseClicked( (e) -> {
                 buttons.apply(canvasState, canvas);
@@ -67,7 +72,7 @@ public class ButtonsEngine {
             // si hay algun boton seleccionado de los toggles se llama al enum que nos genera las figuras
             try {
                 if (figureButtonSelected)
-                    canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), canvas.getGraphicsContext2D()));
+                    canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), canvas.getGraphicsContext2D(),new ColorStyle(colorControllersEngine.getFigureColor(), colorControllersEngine.getStrokeColor(), colorControllersEngine.getStrokeWidth())));
             }catch(Exception e){
                 //En caso de no poder crear la figura, avisamos al usuario
                 Alert errorAlert= new Alert(Alert.AlertType.WARNING);

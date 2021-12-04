@@ -21,12 +21,10 @@ public class PaintPanel extends BorderPane {
 
 
     ButtonsEngine buttonsEngine = new ButtonsEngine();
-    ColorControlsEngine colorControllersEngine = new ColorControlsEngine();
 
     private void setupButtons() {
 
         //Agrego motores de colores y butones
-        colorControllersEngine.setupButtons(buttonsBox);
         buttonsEngine.setupButtons(buttonsBox);
 
         //JavaFX styling
@@ -47,7 +45,6 @@ public class PaintPanel extends BorderPane {
 
         //We setup the listeners to the buttons
         buttonsEngine.startListener(canvasState, canvas, statusPane);
-        colorControllersEngine.startListener(canvasState, canvas);
 
         setLeft(buttonsBox);
         setRight(canvas);

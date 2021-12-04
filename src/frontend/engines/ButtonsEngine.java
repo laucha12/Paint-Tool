@@ -71,7 +71,7 @@ public class ButtonsEngine {
             }catch(Exception e){
                 //En caso de no poder crear la figura, avisamos al usuario
                 Alert errorAlert= new Alert(Alert.AlertType.WARNING);
-                errorAlert.setHeaderText("Error en la creacion de la figura");
+                errorAlert.setHeaderText("Solo se pueden crear rectangulos o cuadrados derecha hacia abajo");
                 errorAlert.setContentText(e.getMessage());
                 errorAlert.showAndWait();
             }

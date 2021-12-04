@@ -12,12 +12,12 @@ import javafx.scene.paint.Color;
 
 public class ColorControlsEngine {
 
-    private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 50.0, MIN_STROKE = 1.0;
+    private static final double MAX_STROKE = 50.0, MIN_STROKE = 1.0;
 
     //Creamos los selectores de color y de ancho, con los valores por defecto
     ColorPicker figureColor = new ColorPicker(Color.web(Colorable.defaultColor()));
     ColorPicker figureStrokeColor = new ColorPicker(Color.web(Colorable.defaultStrokeColor()));
-    Slider figureStrokeWidth = new Slider(DEFAULT_STROKE, MAX_STROKE, MIN_STROKE);
+    Slider figureStrokeWidth = new Slider(Figure.getDefaultStroke(), MAX_STROKE, MIN_STROKE);
 
 
     Label strokeLabel = new Label("Borde");

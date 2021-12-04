@@ -6,13 +6,20 @@ import backend.model.interfaces.Drawable;
 import backend.model.interfaces.Movable;
 import backend.model.interfaces.Selectable;
 
+import java.awt.*;
 import java.util.Collection;
 
 public abstract class Figure implements Movable, Drawable, Colorable, Selectable {
 
      private final FigureStyle color;
 
+     private static final double DEFAULT_STROKE = 1.0;
+
      private boolean selected = false;
+
+     public Figure(){
+          this(new FigureStyle(Colorable.defaultColor(), Colorable.defaultStrokeColor(), DEFAULT_STROKE));
+     }
 
      public Figure (FigureStyle color){
           this.color=color;
@@ -53,6 +60,10 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
 
      public double getStrokeWidth(){
           return color.getWidthStroke();
+     }
+
+     public static double getDefaultStroke(){
+          return DEFAULT_STROKE;
      }
 
      @Override public String getColor() {

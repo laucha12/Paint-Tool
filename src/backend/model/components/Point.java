@@ -2,10 +2,13 @@ package backend.model.components;
 
 import backend.model.interfaces.Movable;
 
+//La clase Point se utilisa tanto en el front como en el back, esta hecha de manera tal
+//que el front le pueda agregar funcionalidad (pero que no modifique las coordenadas
+// de los puntos) pero no quitar y/o modificar la existente.
 public class Point implements Movable {
 
     @Override
-    public final void moveTo(double x, double y) {
+    public void moveTo(double x, double y) {
         updateX(x);
         updateY(y);
     }
@@ -38,13 +41,14 @@ public class Point implements Movable {
         return String.format("{%.2f , %.2f}", x, y);
     }
 
-    protected final void updateX(double x) {
+    private void updateX(double x) {
         this.x += x;
     }
 
-    protected final void updateY(double y) {
+    private void updateY(double y) {
         this.y += y;
     }
+
     @Override
     public final boolean equals(Object other){
         if (this == other)

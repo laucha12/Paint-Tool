@@ -7,7 +7,8 @@ import frontend.engines.CanvasEngine;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ToggleButton;
 
-
+//Enum que almacena la funcionalidad de botones funcionales, definidos como los
+//botones que trabajan a partir del boton seleccionar.
 public enum FunctionButtons {
     DELETE("Borrar") {
         @Override

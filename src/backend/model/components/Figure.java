@@ -10,7 +10,7 @@ import java.util.Collection;
 
 public abstract class Figure implements Movable, Drawable, Colorable, Selectable {
 
-     private FigureStyle color;
+     private final FigureStyle color;
 
      private boolean selected = false;
 

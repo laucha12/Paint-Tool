@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+//Esta clase maneja el estado del canvas, es decir las figuras que se dibujaron,
+// y la funcionalidad de seleccionarlas
+
 public class CanvasState {
 
     //Guarda una lista con las figuras que estan presentes en el canvas

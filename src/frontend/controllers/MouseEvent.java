@@ -2,6 +2,7 @@ package frontend.controllers;
 
 import backend.model.components.Point;
 
+//Clase accessorio para mantener los dos puntos entre los que se creo un evento del mouse
 public class MouseEvent {
 
     private final Point startPoint;

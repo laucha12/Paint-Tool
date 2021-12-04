@@ -4,6 +4,7 @@ import backend.model.CanvasState;
 import backend.model.FigureStyle;
 import backend.model.components.Figure;
 import backend.model.components.Point;
+import backend.model.exceptions.BackEndException;
 import frontend.StatusPanel;
 import frontend.controllers.FigureButtons;
 import frontend.controllers.FunctionButtons;
@@ -67,7 +68,6 @@ public class ButtonsEngine {
         });
 
 
-
         canvas.setOnMouseReleased(event -> {
             mouseEventPressed.setEndPoint(new Point(event.getX(), event.getY()));
 
@@ -75,12 +75,10 @@ public class ButtonsEngine {
             try {
                 if (figureButtonSelected)
                     canvasState.addFigure(actual.getFigure(mouseEventPressed.getStartPoint(), mouseEventPressed.getEndPoint(), canvas.getGraphicsContext2D(),new FigureStyle(colorControllersEngine.getFigureColor(), colorControllersEngine.getStrokeColor(), colorControllersEngine.getStrokeWidth())));
-            }catch(Exception e){
+
+            } catch(BackEndException e){
                 //En caso de no poder crear la figura, avisamos al usuario
-                Alert errorAlert= new Alert(Alert.AlertType.WARNING);
-                errorAlert.setHeaderText("Solo se pueden crear rectangulos o cuadrados derecha hacia abajo");
-                errorAlert.setContentText(e.getMessage());
-                errorAlert.showAndWait();
+                raiseAlert(e);
             }
             CanvasEngine.redrawCanvas(canvasState, canvas);
         });
@@ -122,6 +120,13 @@ public class ButtonsEngine {
         selectionButton.setOnMousePressed(event -> {
             figureButtonSelected = false;
         });
+    }
+
+    public void raiseAlert(Exception e) {
+        Alert errorAlert= new Alert(Alert.AlertType.WARNING);
+        errorAlert.setHeaderText(e.getMessage());
+        errorAlert.setContentText(e.getClass().getName());
+        errorAlert.showAndWait();
     }
 
 }

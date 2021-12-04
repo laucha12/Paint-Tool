@@ -6,7 +6,6 @@ import backend.model.components.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-//TODO: POINT FRONT-END????, IMPLEMENTS PRINT_RECTANGLE ??
 
 final public class LineFrontEnd extends Line {
 

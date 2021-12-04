@@ -7,6 +7,8 @@ import frontend.components.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ToggleButton;
 
+//Enum que almacena la funcionalidad compartida de todos los butones que generan figuras,
+//el hecho que se al presionarlo se devuelve una figure.
 public enum FigureButtons {
     RECTANGLE("Rectangulo") {
         public Figure  getFigure(Point startPoint, Point endPoint, GraphicsContext gc, FigureStyle color) {

@@ -14,7 +14,8 @@ public abstract class Rectangle extends Figure {
     public Rectangle(Point topLeft, Point bottomRight, FigureStyle color) {
         super(color);
         if(topLeft.getX()>bottomRight.getX()||topLeft.getY()>bottomRight.getY()){
-            throw new BackEndException("No se puede armar la figura");
+            throw new BackEndException("No se puede armar la figura ya que el segundo punto tiene que ser" +
+                                        " el punto derecho inferior del rectangulo");
         }
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;

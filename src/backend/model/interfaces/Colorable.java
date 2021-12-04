@@ -1,5 +1,8 @@
 package backend.model.interfaces;
 
+//Esta interfaz maneja la funcionalidad de coloreable, defini
+//que es ser una clase coloreable (no solamente Figures podrian
+//ser coloreables, sino que podriamos tener un TextBox que tenga color)
 public interface Colorable {
 
     String getColor();
@@ -19,7 +22,5 @@ public interface Colorable {
     static String defaultStrokeColor() {
         return "#000000";
     }
-
-    default void resetStrokeColor() { setStrokeColor(Colorable.defaultStrokeColor()); }
 
 }

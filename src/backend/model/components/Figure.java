@@ -10,13 +10,14 @@ import java.util.Collection;
 
 public abstract class Figure implements Movable, Drawable, Colorable, Selectable {
 
-     private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 50.0, MIN_STROKE = 1.0;
      private FigureStyle color;
+
      private boolean selected = false;
 
      public Figure (FigureStyle color){
           this.color=color;
      }
+
      @Override
      public String toString(){
           return identifier() + "[" + getPoints() + "]";
@@ -52,18 +53,6 @@ public abstract class Figure implements Movable, Drawable, Colorable, Selectable
 
      public double getStrokeWidth(){
           return color.getWidthStroke();
-     }
-
-     public static double getDefaultStrokeWidth(){
-          return DEFAULT_STROKE;
-     }
-
-     public static double getMinStroke() {
-          return MIN_STROKE;
-     }
-
-     public static double getMaxStroke(){
-          return MAX_STROKE;
      }
 
      @Override public String getColor() {

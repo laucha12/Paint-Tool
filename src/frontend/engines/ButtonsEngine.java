@@ -21,6 +21,8 @@ public class ButtonsEngine {
     private FigureButtons actual;
     private MouseEvent mouseEventPressed; //ASUMO MOUSE RELEASED NO PUEDE SUCEDER SIN MOUSE PRESSED
     private boolean figureButtonSelected = false;
+
+    //ColorControlEngine se encarga de manejar los colorPickers/Slider
     ColorControlsEngine colorControllersEngine = new ColorControlsEngine();
 
    public void setupButtons(VBox buttonsBox) {

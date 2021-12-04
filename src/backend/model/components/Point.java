@@ -5,16 +5,16 @@ import backend.model.interfaces.Movable;
 public class Point implements Movable {
 
     @Override
-    public void moveTo(double x, double y) {
+    public final void moveTo(double x, double y) {
         updateX(x);
         updateY(y);
     }
 
-    public double distanceXAxisTo(Point other){
+    public final double distanceXAxisTo(Point other){
         return Math.abs(x - other.getX());
     }
 
-    public double distanceYAxisTo(Point other) {
+    public final double distanceYAxisTo(Point other) {
         return Math.abs(y - other.getY());
     }
 
@@ -25,11 +25,11 @@ public class Point implements Movable {
         this.y = y;
     }
 
-    public double getX() {
+    public final double getX() {
         return x;
     }
 
-    public double getY() {
+    public final double getY() {
         return y;
     }
 
@@ -38,15 +38,15 @@ public class Point implements Movable {
         return String.format("{%.2f , %.2f}", x, y);
     }
 
-    protected void updateX(double x) {
+    protected final void updateX(double x) {
         this.x += x;
     }
 
-    protected void updateY(double y) {
+    protected final void updateY(double y) {
         this.y += y;
     }
     @Override
-    public boolean equals(Object other){
+    public final boolean equals(Object other){
         if (this == other)
             return true;
         if(! (other instanceof Point))

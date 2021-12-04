@@ -39,14 +39,11 @@ public enum FigureButtons {
         public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc, ColorStyle color) {
             return new LineFrontEnd(startPoint, endPoint, gc,color);
         }
-    }
-    ;
+    };
 
-    private final String name;
     private final ToggleButton button;
 
     FigureButtons(String name) {
-        this.name = name;
         this.button = new ToggleButton(name);
     }
 

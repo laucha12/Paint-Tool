@@ -25,40 +25,40 @@ public abstract class Line extends Figure {
 
     //Por respuesta del foro de la catedra no hace falta que se pueda seleccionar ni que se muestre en el status panel
     @Override
-    public boolean belongs(Point point){
+    public final boolean belongs(Point point){
      return false;
     }
 
     @Override
-    public Collection<Point> getPoints(){
+    public final Collection<Point> getPoints(){
         List<Point> toReturn = new ArrayList<>();
         toReturn.add(start);
         toReturn.add(end);
         return toReturn;
     }
 
-    public boolean inside(Point point1, Point point2){
+    public final boolean inside(Point point1, Point point2){
         return point2.getX() > this.getEnd().getX() && point2.getY() > getEnd().getY() &&
                 point1.getX() < getStart().getX() && point1.getY() < getStart().getY();
     }
 
-    public Point getStart() {
+    public final Point getStart() {
         return start;
     }
 
-    public Point getEnd() {
+    public final Point getEnd() {
         return end;
     }
 
-    public double getWidth() {
+    public final double getWidth() {
         return WIDTH;
     }
 
-    public double getHeight() {
+    public final double getHeight() {
         return WIDTH;
     }
 
-    public String identifier() {
+    public final String identifier() {
         return "Linea";
     }
 

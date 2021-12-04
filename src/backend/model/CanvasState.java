@@ -79,17 +79,11 @@ public class CanvasState {
         selected.clear();
     }
 
-    public boolean isEmpty(){
-        return selected.isEmpty();
-    }
 
     public void delete(Collection<Figure> figures){
         list.removeAll(figures);
     }
 
-    public void resetCanvas() {
-        list.clear();
-    }
 
     public void selectionModeStart() {
         lastSelectedElementsAmount = getSelected().size();

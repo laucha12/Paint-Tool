@@ -11,40 +11,34 @@ import javafx.scene.control.ToggleButton;
 public enum FunctionButtons {
     DELETE("Borrar") {
         @Override
-        public void apply(CanvasState canvasState, Canvas canvas) {
+        public void applyWithoutRedrawing(CanvasState canvasState, Canvas canvas) {
             canvasState.delete(canvasState.getSelected());
-            CanvasEngine.redrawCanvas(canvasState, canvas);
         }
     },
     TOBACK("Al fondo") {
         @Override
-        public void apply(CanvasState canvasState, Canvas canvas) {
+        public void applyWithoutRedrawing(CanvasState canvasState, Canvas canvas) {
             canvasState.sendMultipleFiguresToBack(canvasState.getSelected());
             canvasState.unselectAll();
-            CanvasEngine.redrawCanvas(canvasState, canvas);
         }
     },
     TOFRONT("Al frente") {
         @Override
-        public void apply(CanvasState canvasState, Canvas canvas) {
+        public void applyWithoutRedrawing(CanvasState canvasState, Canvas canvas) {
             canvasState.sendMultipleFiguresToFront(canvasState.getSelected());
             canvasState.unselectAll();
-            CanvasEngine.redrawCanvas(canvasState, canvas);
-        }
-    },
-    CLEAR("Limpiar") {
-        @Override
-        public void apply(CanvasState canvasState, Canvas canvas) {
-            canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());      //Se borra lo presente en la pantalla
-            canvasState.resetCanvas();
-            CanvasEngine.redrawCanvas(canvasState, canvas);
         }
     };
 
     private final String name;
     private final ToggleButton button;
 
-    abstract public void apply(CanvasState canvasState, Canvas canvas);
+    public void apply(CanvasState canvasState, Canvas canvas) {
+        applyWithoutRedrawing(canvasState, canvas);
+        CanvasEngine.redrawCanvas(canvasState, canvas);
+    }
+
+    abstract public void applyWithoutRedrawing(CanvasState canvasState, Canvas canvas);
 
     FunctionButtons(String name) {
         this.name = name;

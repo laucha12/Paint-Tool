@@ -10,6 +10,13 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+/*
+* Esta clase encapsula la funcionalidades de los colorPickers/Slider.
+* Se encarga de actualizar las figuras seleccionada cuando hay un cambio en el colorPicker/Slide.
+* A su vez, tiene metodos que pueden retornar el color/grosor que tiene seleccionado actualemente el colorPicker/slider.
+* En caso de que se crean nuevas figuras por ejemplo, se necesitar saber el color/grosor para crear las figura nueva.
+* */
+
 public class ColorControlsEngine {
 
     private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 50.0, MIN_STROKE = 1.0;

@@ -20,7 +20,6 @@ public abstract class Line extends Figure {
        this.start = start;
        this.end = end;
        
-       this.setStrokeColor(this.getColor()); //Necesario hacer esto sino aparece toda negra la lines
     }
 
     //Por respuesta del foro de la catedra no hace falta que se pueda seleccionar ni que se muestre en el status panel

@@ -51,6 +51,7 @@ public class CanvasState {
 
     public String selectFigure( Point actualPoint, Point eventPoint){
         StringBuilder aux = new StringBuilder("Figuras seleccionadas: ");
+        unselectAll();
         for (int i = list.size()-1; i>=0;i--) {
 
             Figure figure = list.get(i);

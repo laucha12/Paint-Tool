@@ -1,10 +1,10 @@
 package backend.model;
 
-public class ColorStyle {
+public class FigureStyle {
     private String colorFigure;
     private String colorStroke;
     private double widthStroke;
-    public ColorStyle(String colorFigure,String colorStroke,double widthStroke){
+    public FigureStyle(String colorFigure, String colorStroke, double widthStroke){
         this.colorFigure=colorFigure;
         this.colorStroke=colorStroke;
         this.widthStroke=widthStroke;

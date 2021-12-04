@@ -1,14 +1,14 @@
 package backend.model.components;
 
 
-import backend.model.ColorStyle;
+import backend.model.FigureStyle;
 import backend.model.exceptions.BackEndException;
 
 public abstract class Square extends Rectangle {
 
     private static final String NAME = "Cuadrado";
 
-    public Square(Point topLeft, Point bottomRight, ColorStyle color) {
+    public Square(Point topLeft, Point bottomRight, FigureStyle color) {
         super(topLeft, bottomRight,color);
 
         if(topLeft.distanceXAxisTo(bottomRight) != topLeft.distanceYAxisTo(bottomRight))

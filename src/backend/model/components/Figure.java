@@ -1,6 +1,6 @@
 package backend.model.components;
 
-import backend.model.ColorStyle;
+import backend.model.FigureStyle;
 import backend.model.interfaces.Colorable;
 import backend.model.interfaces.Drawable;
 import backend.model.interfaces.Movable;
@@ -11,10 +11,10 @@ import java.util.Collection;
 public abstract class Figure implements Movable, Drawable, Colorable, Selectable {
 
      private static final double DEFAULT_STROKE = 1.0, MAX_STROKE = 50.0, MIN_STROKE = 1.0;
-     private ColorStyle color;
+     private FigureStyle color;
      private boolean selected = false;
 
-     public Figure (ColorStyle color){
+     public Figure (FigureStyle color){
           this.color=color;
      }
      @Override

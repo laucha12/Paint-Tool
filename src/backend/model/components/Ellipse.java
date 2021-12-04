@@ -1,6 +1,6 @@
 package backend.model.components;
 
-import backend.model.ColorStyle;
+import backend.model.FigureStyle;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,7 @@ public abstract class Ellipse extends Figure {
     protected final double minAxis, maxAxis;
     private final static String NAME = "Elipse";
 
-    public Ellipse(Point centerPoint, double minAxis, double maxAxis, ColorStyle color) {
+    public Ellipse(Point centerPoint, double minAxis, double maxAxis, FigureStyle color) {
         super(color);
         this.centerPoint = centerPoint;
         this.maxAxis = maxAxis;

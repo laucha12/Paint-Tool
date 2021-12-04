@@ -20,14 +20,14 @@ public abstract class Ellipse extends Figure {
     //SELECTABLE METHODS
 
     @Override
-    public boolean belongs(Point point){
+    public final boolean belongs(Point point){
          return ((Math.pow(this.getCenterPoint().getX() - point.getX(), 2)/Math.pow(getWidth(),2) ) +
                  (Math.pow(this.getCenterPoint().getY() - point.getY(), 2)/Math.pow(getHeight(),2)) ) <= 1;
 
     }
 
     @Override
-    public boolean inside(Point point1, Point point2) {
+    public final boolean inside(Point point1, Point point2) {
         if (centerPoint.getX() + getWidth()  > point2.getX()) {
             //it is outside of the rectangle on the right side
             return false;
@@ -49,19 +49,19 @@ public abstract class Ellipse extends Figure {
     //GETTERS
 
     @Override
-    public Collection<Point> getPoints() {
+    public final Collection<Point> getPoints() {
         List<Point> toReturn = new ArrayList<>();
         toReturn.add(centerPoint);
         return toReturn;
     }
 
     @Override
-    public double getWidth() {
+    public final double getWidth() {
         return minAxis;
     }
 
     @Override
-    public double getHeight() {
+    public final double getHeight() {
         return maxAxis;
     }
 
@@ -70,7 +70,7 @@ public abstract class Ellipse extends Figure {
         return NAME;
     }
 
-    public Point getCenterPoint() {
+    public final Point getCenterPoint() {
         return centerPoint;
     }
 

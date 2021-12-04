@@ -20,41 +20,41 @@ public abstract class Rectangle extends Figure {
 
     //SELECTABLE METHODS
     @Override
-    public boolean belongs(Point point){
+    public final boolean belongs(Point point){
         return  point.getX() > this.getTopLeft().getX() && point.getX() < this.getBottomRight().getX() &&
                 point.getY() > this.getTopLeft().getY() && point.getY() < this.getBottomRight().getY();
     }
 
     @Override
-    public boolean inside(Point point1, Point point2){
+    public final boolean inside(Point point1, Point point2){
         return point2.getX() > getBottomRight().getX() && point2.getY() > getBottomRight().getY() &&
           point1.getX() < getTopLeft().getX() && point1.getY() < getTopLeft().getY();
     }
 
     //GETTERS
     @Override
-    public Collection<Point> getPoints() {
+    public final Collection<Point> getPoints() {
         List<Point> toReturn = new ArrayList<>();
         toReturn.add(topLeft);
         toReturn.add(bottomRight);
         return toReturn;
     }
 
-    public Point getTopLeft() {
+    public final Point getTopLeft() {
         return topLeft;
     }
 
-    public Point getBottomRight() {
+    public final Point getBottomRight() {
         return bottomRight;
     }
 
     @Override
-    public double getWidth() {
+    public final double getWidth() {
         return Math.abs( bottomRight.getX() - topLeft.getX());
     }
 
     @Override
-    public double getHeight() { return Math.abs(topLeft.getY() - bottomRight.getY()); }
+    public final double getHeight() { return Math.abs(topLeft.getY() - bottomRight.getY()); }
 
     @Override
     public String identifier() {

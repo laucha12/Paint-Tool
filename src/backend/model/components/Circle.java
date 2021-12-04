@@ -9,9 +9,9 @@ public abstract class Circle extends Ellipse {
 
     }
 
-    public double getRadius(){
+    public final double getRadius(){
         return this.getHeight();
     }
 
-    @Override public String identifier() { return NAME;}
+    @Override public final String identifier() { return NAME;}
 }

@@ -38,15 +38,12 @@ public abstract class Ellipse extends Figure {
             //it is outside on the left side
             return false;
         }
+        //it is outside on the top side
         if (centerPoint.getY() + getHeight()  > point2.getY()) {
             //it is outside of the rectangle on the bottom side
             return false;
 
-        } else if (centerPoint.getY() -  getHeight() < point1.getY()) {
-            //it is outside on the top side
-            return false;
-        }
-        return true;
+        } else return !(centerPoint.getY() - getHeight() < point1.getY());
     }
 
     //GETTERS

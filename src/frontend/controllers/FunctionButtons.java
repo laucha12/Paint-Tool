@@ -1,8 +1,7 @@
 package frontend.controllers;
 
 import backend.model.CanvasState;
-import backend.model.components.Figure;
-import frontend.PaintPanel.*;
+
 import frontend.engines.CanvasEngine;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ToggleButton;

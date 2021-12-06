@@ -6,7 +6,6 @@ import backend.model.interfaces.Drawable;
 import backend.model.interfaces.Movable;
 import backend.model.interfaces.Selectable;
 
-import java.awt.*;
 import java.util.Collection;
 
 public abstract class Figure implements Movable, Drawable, Colorable, Selectable {

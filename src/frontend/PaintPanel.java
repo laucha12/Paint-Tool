@@ -1,7 +1,6 @@
 package frontend;
 
 import backend.model.*;
-import frontend.engines.ColorControlsEngine;
 import frontend.engines.ButtonsEngine;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;

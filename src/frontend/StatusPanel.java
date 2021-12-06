@@ -51,7 +51,7 @@ public class StatusPanel extends BorderPane {
 			// si esta arriba de una figura muestra que esta arriba de la misma
 			if(figure.belongs(eventPoint)) {
 				found = true;
-				label.append(figure.toString());
+				label.append(figure);
 			}
 		}
 		if(found) {

@@ -60,11 +60,11 @@ public class CanvasState {
             if(figure.inside(actualPoint, eventPoint)) {
                 figure.select();
                 selected.add(figure);
-                aux.append(figure.toString());
+                aux.append(figure);
             }else if ((figure.belongs(eventPoint) && actualPoint.equals(eventPoint) )){
                 figure.select();
                 selected.add(figure);
-                  aux.append(figure.toString());
+                  aux.append(figure);
                   return  aux.toString();
             }
         }

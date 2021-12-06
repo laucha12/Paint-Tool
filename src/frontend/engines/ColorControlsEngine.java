@@ -3,6 +3,7 @@ package frontend.engines;
 import backend.model.CanvasState;
 import backend.model.components.Figure;
 import backend.model.interfaces.Colorable;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
@@ -24,6 +25,9 @@ public class ColorControlsEngine {
     Label fillLabel = new Label("Relleno");
 
     public void setupButtons(VBox buttonsBox) {
+        figureColor.setCursor(Cursor.HAND);
+        figureStrokeColor.setCursor(Cursor.HAND);
+        figureStrokeWidth.setCursor(Cursor.HAND);
         buttonsBox.getChildren().add(strokeLabel);
         figureStrokeWidth.setShowTickMarks(true);
         figureStrokeWidth.setShowTickLabels(true);

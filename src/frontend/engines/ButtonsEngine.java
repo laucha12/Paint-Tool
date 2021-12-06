@@ -28,14 +28,13 @@ public class ButtonsEngine {
 
    public void setupButtons(VBox buttonsBox) {
 
-       ToggleButton[] toolsArr = {FigureButtons.RECTANGLE.getButton(),
+       ToggleButton[] toolsArr = {selectionButton, FigureButtons.RECTANGLE.getButton(),
                FigureButtons.CIRCLE.getButton(), FigureButtons.SQUARE.getButton(),
                FigureButtons.ELLIPSE.getButton(), FigureButtons.LINE.getButton(),
                FunctionButtons.DELETE.getButton(), FunctionButtons.TOBACK.getButton(),
-               FunctionButtons.TOFRONT.getButton(), selectionButton};
+               FunctionButtons.TOFRONT.getButton()};
 
        ToggleGroup tools = new ToggleGroup();
-       colorControllersEngine.setupButtons(buttonsBox);
 
        for (ToggleButton tool : toolsArr) {
            tool.setMinWidth(90);
@@ -44,6 +43,7 @@ public class ButtonsEngine {
        }
 
        buttonsBox.getChildren().addAll(toolsArr);
+       colorControllersEngine.setupButtons(buttonsBox);
    }
 
 

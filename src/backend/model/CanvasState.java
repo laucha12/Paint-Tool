@@ -83,9 +83,9 @@ public class CanvasState {
         selected.clear();
     }
 
-
-    public void delete(Collection<Figure> figures){
-        list.removeAll(figures);
+    public void deleteSelected(){
+        list.removeAll(selected);
+        selected.clear();
     }
 
 

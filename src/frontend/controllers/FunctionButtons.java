@@ -12,7 +12,7 @@ public enum FunctionButtons {
     DELETE("Borrar") {
         @Override
         public void applyWithoutRedrawing(CanvasState canvasState, Canvas canvas) {
-            canvasState.delete(canvasState.getSelected());
+            canvasState.deleteSelected();
         }
     },
     TOBACK("Al fondo") {

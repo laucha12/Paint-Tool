@@ -63,9 +63,7 @@ public class ButtonsEngine {
                 figureButtonSelected = true;
             });
 
-        canvas.setOnMousePressed(event -> {
-            mouseEventPressed = new MouseEvent(new Point(event.getX(), event.getY()));
-        });
+        canvas.setOnMousePressed(event -> mouseEventPressed = new MouseEvent(new Point(event.getX(), event.getY())));
 
 
         canvas.setOnMouseReleased(event -> {
@@ -117,9 +115,7 @@ public class ButtonsEngine {
             }
         });
 
-        selectionButton.setOnMousePressed(event -> {
-            figureButtonSelected = false;
-        });
+        selectionButton.setOnMousePressed(event -> figureButtonSelected = false);
     }
 
     public void raiseAlert(Exception e) {

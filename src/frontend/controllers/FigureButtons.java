@@ -24,7 +24,7 @@ public enum FigureButtons {
     CIRCLE("Circulo") {
         @Override
         public Figure getFigure(Point startPoint, Point endPoint, GraphicsContext gc, FigureStyle color) {
-            double radius = Math.abs(endPoint.getX() - startPoint.getX());
+            double radius = (Math.sqrt(Math.pow(endPoint.getX() - startPoint.getX(), 2) + Math.pow(endPoint.getY() - startPoint.getY(), 2)));
             return new CircleFrontEnd(startPoint, radius, gc,color);
         }
     },

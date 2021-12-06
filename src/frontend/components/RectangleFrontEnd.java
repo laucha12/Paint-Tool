@@ -11,12 +11,12 @@ final public class RectangleFrontEnd extends Rectangle {
     private final GraphicsContext gc;
 
     public RectangleFrontEnd(Point topLeft, Point bottomRight, GraphicsContext gc, FigureStyle color) {
-        super(topLeft,bottomRight,color);
+        super(topLeft, bottomRight, color);
         this.gc = gc;
     }
 
     @Override
     public void display() {
-        PolygonsEngine.print(gc,this.getTopLeft(),this.getWidth(),this.getHeight(), Color.web(getColor()),Color.web(getStrokeColor()), getStrokeWidth());
+        PolygonsEngine.print(gc, this.getTopLeft(), this.getWidth(), this.getHeight(), Color.web(getColor()), Color.web(getStrokeColor()), getStrokeWidth());
     }
 }

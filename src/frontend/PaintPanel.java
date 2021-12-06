@@ -43,7 +43,7 @@ public class PaintPanel extends BorderPane {
         //We include buttons in the UI
         setupButtons();
 
-        //We setup the listeners to the buttons
+        //We set up the listeners to the buttons
         buttonsEngine.startListener(canvasState, canvas, statusPane);
 
         setLeft(buttonsBox);

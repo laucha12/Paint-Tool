@@ -33,7 +33,6 @@ public class ButtonsEngine {
                FigureButtons.ELLIPSE.getButton(), FigureButtons.LINE.getButton(),
                FunctionButtons.DELETE.getButton(), FunctionButtons.TOBACK.getButton(),
                FunctionButtons.TOFRONT.getButton()};
-
        ToggleGroup tools = new ToggleGroup();
 
        for (ToggleButton tool : toolsArr) {
@@ -59,9 +58,12 @@ public class ButtonsEngine {
         for (FigureButtons button : FigureButtons.values())
             button.getButton().setOnMouseClicked((e) -> {
                 canvasState.unselectAll();
+                CanvasEngine.redrawCanvas(canvasState,canvas);
+                canvasState.unselectAll();
                 actual = button;
                 figureButtonSelected = true;
             });
+
 
         canvas.setOnMousePressed(event -> mouseEventPressed = new MouseEvent(new Point(event.getX(), event.getY())));
 
@@ -95,9 +97,10 @@ public class ButtonsEngine {
                 canvasState.selectionModeStart();
                 statusPane.updateStatus(canvasState.selectFigure(mouseEventPressed.getStartPoint(), eventPoint));
                 statusPane.selectionModeEnded();
-                canvasState.selectionModeEnded();
                 CanvasEngine.redrawCanvas(canvasState, canvas);
             }
+            canvasState.selectionModeEnded();
+
         });
 
 
